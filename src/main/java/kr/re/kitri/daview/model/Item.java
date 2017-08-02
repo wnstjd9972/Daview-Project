@@ -1,5 +1,7 @@
 package kr.re.kitri.daview.model;
 
+import java.sql.Date;
+
 public class Item {
     private int areaCode;
     private String addr1;
@@ -135,5 +137,11 @@ public class Item {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setEventStartDate(Date date) {
+    }
+
+    public void setEventEndDate(Date date) {
     }
 }

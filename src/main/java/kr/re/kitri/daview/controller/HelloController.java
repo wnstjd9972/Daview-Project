@@ -3,28 +3,33 @@ package kr.re.kitri.daview.controller;
 
 
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import kr.re.kitri.daview.model.Item;
+import kr.re.kitri.daview.service.MainService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
 
 @Controller
 public class HelloController {
-
-    @RequestMapping("/")
-    public String index(){
-        return "hello";
-    }
+    @Autowired
+    private MainService mainService;
 
     @RequestMapping("/daview")
-    public  String daview(Model model) {
-        //model.addAttribute("name", "SpringBlog from Millky");
-        return "main";
+    public ModelAndView main(Item item){
+        List<Item> list = mainService.getValue(item);
+        return new ModelAndView("main")
+                .addObject("item",list);
     }
 
     @RequestMapping("/daview/all")
