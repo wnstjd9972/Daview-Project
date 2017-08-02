@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>전국 구석구석</title>
-    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
     <link rel="shortcut icon" th:href="@{/image/favicon.ico}"/>
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
 </head>
 <body>
+
 <div class="header">
     <h1><a href="/daview">
         <img class="Logo" th:src="@{/image/project_logo.png}" alt="다뷰"/>
@@ -19,7 +21,7 @@
 
         <ul id="gnb-container">
             <li class="has_d2">
-                <a href="/">계절별 축제
+                <a href="/"> ${item}
                     <small>봄/여름/가을/겨울</small>
                 </a>
 
@@ -74,34 +76,48 @@
         <div class="map-area">
             <div id="map" style="width:100%;height:100%;"></div>
 
-            <script>
+            <script th:inline="javascript">
 
-                var HOME_PATH = window.HOME_PATH || '.';
-                var position = new naver.maps.LatLng(37.3595704, 127.105399);
-                var hello = new naver.maps.LatLng()
+                var item = [[${item}]];
+                var date = new Date();
+                var today = date.getMonth()+date.getDate();
+
                 var map = new naver.maps.Map('map', {
-                    zoomControl: true,
-                    minZoom: 1,
-                    zoom: 2
+                    zoom: 2,
                 });
 
-                var marker = new naver.maps.Marker({
-                    map: map,
-                    position: position,
-                    icon: {
-                        path: [
-                            new naver.maps.Point(0, 70), new naver.maps.Point(20, 100), new naver.maps.Point(40, 70),
-                            new naver.maps.Point(30, 70), new naver.maps.Point(70, 0), new naver.maps.Point(10, 70)
-                        ],
-                        style: "closedPath",
-                        anchor: new naver.maps.Point(23, 103),
-                        fillColor: '#ff0000',
-                        fillOpacity: 1,
-                        strokeColor: '#000000',
-                        strokeStyle: 'solid',
-                        strokeWeight: 3
+                for (var i = 0; i < item.length; i ++) {
+                    if ((today - item[i].eventStartDay) > 0 ){
+                        var willCircle = new naver.maps.Circle({
+                                map: map,
+                                position: new naver.maps.LatLng(item[i].mapX, item[i.mapY]),
+                                radius: 6000,
+                                fillColor: 'green',
+                                fillOpacity: 0.5,
+                                strokeColor: 'white',
+                                strokeOpacity: 1,
+                                strokeWeight: 1,
+
+                        })
                     }
+
+
+                }
+
+
+                var ingCircle = new naver.maps.Circle({
+                    map: map,
+                    title:name[0] ,
+                    center: new naver.maps.LatLng(36.0207091, 127.9204629),
+                    radius: 6000,
+                    fillColor: 'crimson',
+                    fillOpacity: 0.5,
+                    strokeColor: 'white',
+                    strokeOpacity: 1,
+                    strokeWeight: 1,
                 });
+
+
 
             </script>
         </div>
@@ -157,6 +173,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
