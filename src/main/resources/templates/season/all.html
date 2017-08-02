@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>전국 구석구석</title>
+
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
+  <link rel="shortcut icon" th:href="@{/image/web_logo.png}"/>
+  <script type="text/javascript"
+          src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
+</head>
+<body>
+<div class="header">
+  <h1><a href="/daview">
+    <img class="Logo" th:src="@{/image/project_logo.png}" alt="다뷰"/>
+  </a></h1>
+
+  <div class="gnb">
+
+    <ul id="gnb-container">
+      <li class="has_d2">
+        <a href="/">계절별 축제
+          <small>봄/여름/가을/겨울</small>
+        </a>
+
+        <div class="depth2_bx">
+          <a href="/daview/all">모든 계절</a>
+          <a href="/daview/spring">봄</a>
+          <a href="/daview/summer">여름</a>
+          <a href="/daview/fall">가을</a>
+          <a href="/daview/winter">겨울</a>
+        </div>
+      </li>
+
+      <li class="has_d2">
+        <a href="/search/map">테마별 축제
+          <small>불꽃놀이/해변축제/꽃축제</small>
+        </a>
+
+        <div class="depth2_bx">
+          <a href="/">모든 테마</a>
+          <a href="/">불꽃놀이</a>
+          <a href="/">해변축제</a>
+          <a href="/">꽃축제</a>
+        </div>
+      </li>
+
+      <li class="has_d2">
+        <a href="/">축제 순위
+          <small>전국 축제 TOP 100</small>
+        </a>
+      </li>
+
+      <li class="has_d2">
+        <a href="/">고객센터</a>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="top_btn">
+    <div class="bx_user">
+      <button type="button">로그인</button>
+      <button type="button">회원가입</button>
+    </div>
+  </div>
+</div>
