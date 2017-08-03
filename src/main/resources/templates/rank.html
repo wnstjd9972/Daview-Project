@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymleaf.org">
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>전국 구석구석</title>
-
-    <link th:href="@{/css/main.css}" rel="stylesheet" />
-    <link rel="shortcut icon" th:href="@{/image/web_logo.png}"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link rel="shortcut icon" th:href="@{/image/favicon.ico}"/>
     <script type="text/javascript"
-            src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf&submodules=panorama,geocoder,visualization"></script>
 </head>
 <body>
 
@@ -77,7 +78,27 @@
             <div id="map" style="width:100%;height:100%;">
 
 
+                <table id="rankTable">
+                    <thead>
+                    <tr>
+                        <th>title</th>
+                        <th>addr1</th>
+                        <th>popularity</th>
+                        <th>st_date</th>
+                        <th>end_date</th>
+                    </tr>
+                    </thead>
 
+                    <tbody>
+                    <tr th:each="rank : ${rankList}">
+                        <td th:text="${rank.title}">title</td>
+                        <td th:text="${rank.addr1}">addr1</td>
+                        <td th:text="${rank.readCount}">popularity</td>
+                        <td th:text="${rank.eventStartDate}">StartDate</td>
+                        <td th:text="${rank.eventEndDate}">EndDate</td>
+                    </tr>
+                    </tbody>
+                </table>
 
             </div>
         </div>
@@ -139,10 +160,3 @@
 
 </body>
 </html>
-
-
-<!--    <td th:text="${Rank.title}"></td>
-                    <td th:text="${Rank.addr1}"></td>
-                    <td th:text="${Rank.readCount}"></td>
-                    <td th:text="${Rank.eventStrartDate}"></td>
-                    <td th:text="${Rank.eventEndDate}"></td>-->
