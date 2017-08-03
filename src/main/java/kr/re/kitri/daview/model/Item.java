@@ -1,41 +1,25 @@
 package kr.re.kitri.daview.model;
 
+import java.sql.Date;
+
 public class Item {
     private int areaCode;
     private String addr1;
     private int contentId;
-    private int eventStartDate;
-    private int eventEndDate;
+    private Date eventStartDate;
+    private Date eventEndDate;
     private Object firstImage;
     private double mapX;
     private double mapY;
     private int readCount;
     private String tel;
-    private String title;
+    private Object title;
 
     public Item() {
 
     }
 
-    @Override
-    public String toString() {
-        return "Item{" +
-                "areaCode=" + areaCode +
-                ", addr1='" + addr1 + '\'' +
-                ", contentId=" + contentId +
-                ", eventStartDate='" + eventStartDate + '\'' +
-                ", eventEndDate='" + eventEndDate + '\'' +
-                ", firstImage='" + firstImage + '\'' +
-                ", mapX=" + mapX +
-                ", mapY=" + mapY +
-                ", readCount=" + readCount +
-                ", tel='" + tel + '\'' +
-                ", title='" + title + '\'' +
-                '}';
-    }
-
-    public Item(int areaCode, String addr1, int contentId, int eventStartDate, int eventEndDate,
-                String firstImage, float mapX, float mapY, int readCount, String tel, String title) {
+    public Item(int areaCode, String addr1, int contentId, Date eventStartDate, Date eventEndDate, Object firstImage, int mapX, int mapY, int readCount, String tel, Object title) {
         this.areaCode = areaCode;
         this.addr1 = addr1;
         this.contentId = contentId;
@@ -73,19 +57,19 @@ public class Item {
         this.contentId = contentId;
     }
 
-    public int getEventStartDate() {
+    public Date getEventStartDate() {
         return eventStartDate;
     }
 
-    public void setEventStartDate(int eventStartDate) {
+    public void setEventStartDate(Date eventStartDate) {
         this.eventStartDate = eventStartDate;
     }
 
-    public int getEventEndDate() {
+    public Date getEventEndDate() {
         return eventEndDate;
     }
 
-    public void setEventEndDate(int eventEndDate) {
+    public void setEventEndDate(Date eventEndDate) {
         this.eventEndDate = eventEndDate;
     }
 
@@ -129,11 +113,29 @@ public class Item {
         this.tel = tel;
     }
 
-    public String getTitle() {
+    public Object getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(Object title) {
         this.title = title;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "areaCode=" + areaCode +
+                ", addr1='" + addr1 + '\'' +
+                ", contentId=" + contentId +
+                ", eventStartDate=" + eventStartDate +
+                ", eventEndDate=" + eventEndDate +
+                ", firstImage=" + firstImage +
+                ", mapX='" + mapX + '\'' +
+                ", mapY='" + mapY + '\'' +
+                ", readCount=" + readCount +
+                ", tel='" + tel + '\'' +
+                ", title=" + title +
+                '}';
     }
 }

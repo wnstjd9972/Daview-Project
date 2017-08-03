@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 public class LogginAspect {
     Logger logger = LoggerFactory.getLogger(LogginAspect.class);
 
-    @Before("execution(* kr.re.kitri.dataview..*.*(..))")
+    @Before("execution(* kr.re.kitri.daview..*.*(..))")
     public void  logger(JoinPoint joinpoint){
         logger.debug(joinpoint.getSignature().getName()+ "logging");
     }
