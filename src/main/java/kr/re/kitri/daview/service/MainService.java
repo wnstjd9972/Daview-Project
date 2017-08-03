@@ -12,8 +12,8 @@ public class MainService {
 
     @Autowired
     private MainDao mainDao;
-    public List<Item> getValue(Item item) {
-      return mainDao.getXY(item);
+    public List<Item> getValue() {
+      return mainDao.getXY();
 
     }
 }

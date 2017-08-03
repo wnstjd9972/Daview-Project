@@ -72,17 +72,17 @@ public class InsertService {
                 String query = "INSERT INTO festival values (?,?,?,?,?,?,?,?,?,?,?)";
                 pstmt = conn.prepareStatement(query);
                 JSONObject itemObj = (JSONObject) i;
-                pstmt.setInt(1, itemObj.getInt("areacode"));
-                pstmt.setString(2, itemObj.getString("addr1"));
-                pstmt.setInt(3, itemObj.getInt("contentid"));
-                pstmt.setInt(4, itemObj.getInt("eventstartdate"));
-                pstmt.setInt(5, itemObj.getInt("eventenddate"));
+                pstmt.setObject(1, itemObj.opt("areacode"));
+                pstmt.setObject(2, itemObj.opt("addr1"));
+                pstmt.setObject(3, itemObj.opt("contentid"));
+                pstmt.setObject(4, itemObj.opt("eventstartdate"));
+                pstmt.setObject(5, itemObj.opt("eventenddate"));
                 pstmt.setObject(6, itemObj.opt("firstimage"));
-                pstmt.setDouble(7, itemObj.getDouble("mapx"));
-                pstmt.setDouble(8, itemObj.getDouble("mapy"));
-                pstmt.setInt(9, itemObj.getInt("readcount"));
-                pstmt.setString(10, itemObj.optString("tel"));
-                pstmt.setString(11, itemObj.getString("title"));
+                pstmt.setObject(7, itemObj.opt("mapx"));
+                pstmt.setObject(8, itemObj.opt("mapy"));
+                pstmt.setObject(9, itemObj.opt("readcount"));
+                pstmt.setObject(10, itemObj.opt("tel"));
+                pstmt.setObject(11, itemObj.opt("title"));
                 pstmt.executeUpdate();
             }
 

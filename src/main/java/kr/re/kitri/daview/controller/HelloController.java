@@ -26,10 +26,9 @@ public class HelloController {
     private MainService mainService;
 
     @RequestMapping("/daview")
-    public ModelAndView main(Item item){
-        List<Item> list = mainService.getValue(item);
+    public ModelAndView main(){
         return new ModelAndView("main")
-                .addObject("item",list);
+                .addObject("item", mainService.getValue());
     }
 
     @RequestMapping("/daview/all")

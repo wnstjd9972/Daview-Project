@@ -16,15 +16,16 @@ import java.util.List;
 public class MainDao {
 
     @Autowired InsertService insertService;
-    public List<Item> getXY(Item item) {
+    public List<Item> getXY() {
 
        Connection con  = insertService.getConnection();
        String query = "select * from festival;";List<Item> itemArrayList = new ArrayList<>();
-
+       Item item;
         try {
             PreparedStatement pstmt = con.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()) {
+                item = new Item();
                 item.setAreaCode(rs.getInt(1));
                 item.setAddr1(rs.getString(2));
                 item.setContentId(rs.getInt(3));
@@ -36,7 +37,6 @@ public class MainDao {
                 item.setReadCount(rs.getInt(9));
                 item.setTel(rs.getString(10));
                 item.setTitle(rs.getString(11));
-                System.out.println(item);
                 itemArrayList.add(item);
 
             }
@@ -47,4 +47,5 @@ public class MainDao {
         }
         return itemArrayList;
     }
+
 }

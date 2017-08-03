@@ -8,7 +8,7 @@
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
     <link rel="shortcut icon" th:href="@{/image/favicon.ico}"/>
     <script type="text/javascript"
-            src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf&submodules=panorama,geocoder,visualization"></script>
 </head>
 <body>
 
@@ -67,6 +67,12 @@
         </div>
     </div>
 </div>
+<!--<tr th:each="user : ${item}">-->
+<!--<td th:text="${user.mapX}">emil</td>-->
+<!--<td th:text="${user.mapY}">name</td>-->
+<!--<td th:text="${user.eventEndDate}">stat</td>-->
+<!--<td th:text="${user.eventStartDate}">super</td>-->
+<!--</tr>-->
 
 <div class="container">
 
@@ -77,52 +83,46 @@
             <div id="map" style="width:100%;height:100%;"></div>
 
             <script th:inline="javascript">
-
                 var item = [[${item}]];
-                var date = new Date();
-                var today = date.getMonth()+date.getDate();
-                var map = new naver.maps.Map('map', {
+
+                //지도를 삽입할 HTML 엘리먼트 또는 HTML 엘리먼트의 id를 지정합니다.
+                var mapDiv = document.getElementById('map'); // 'map' 으로 선언해도 동일
+                var naverMapOptions = {
+                    center: new naver.maps.LatLng(36, 127),
                     zoom: 2,
-                });
+                    mapTypeId: naver.maps.MapTypeId.NORMAL,
+                    mapTypeControl: true
+                };
+                //옵션 없이 지도 객체를 생성하면 서울시청을 중심으로 하는 11레벨의 지도가 생성됩니다.
+                var map = new naver.maps.Map(mapDiv, naverMapOptions);
+                var setMap = {
+                    pointMap: function () {
+                        var ingData = [];
+                        var willData = [];
+                        var date = new Date();
+                        var today = date.getMonth() + date.getDate();
+                        console.log(item[1].eventStartDate);
+                        for (var i = 0; i < item.length; i++) {
+                            var festivalDate = item[i].getMonth()+item[i].getDate();
+                            if ((today - item[i].eventStartDay) > 0) {
+                                willData.push(new naver.maps.visualization.WeightedLocation(item[i].mapY, item[i].mapX, 5*0.1));
+                            }
+                            else if ((today - item[i].eventStartDay) < 0){
+                                if ((today - item[i].eventEndDay) > 0) {
 
-
-                for (var i = 0; i < item.length; i ++) {
-                    if ((today - item[i].eventStartDay) > 0 ){
-                        var willCircle = new naver.maps.Circle({
-                                map: map,
-                                position: new naver.maps.LatLng(item[i].mapX, item[i.mapY]),
-                                radius: 6000,
-                                fillColor: 'green',
-                                fillOpacity: 0.5,
-                                strokeColor: 'white',
-                                strokeOpacity: 1,
-                                strokeWeight: 1,
-                        })
-                    }
-                    else if((today - item[i].eventStartDay < 0)){
-                        if((today - item[i].eventEndDay) > 0 ){
-
+                                }
+                            }
                         }
 
+                        var dotMap = new naver.maps.visualization.DotMap({
+                            map:map,
+                            data : ingData,
+                            radius: 15
+                        });
                     }
 
-
-                }
-
-
-                var ingCircle = new naver.maps.Circle({
-                    map: map,
-                    title:name[0] ,
-                    center: new naver.maps.LatLng(36.0207091, 127.9204629),
-                    radius: 6000,
-                    fillColor: 'crimson',
-                    fillOpacity: 0.5,
-                    strokeColor: 'white',
-                    strokeOpacity: 1,
-                    strokeWeight: 1,
-                });
-
-
+                };
+                setMap.pointMap();
 
             </script>
         </div>
