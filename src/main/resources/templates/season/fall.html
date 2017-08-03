@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -66,3 +67,24 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+  <div class="map-container">
+    <table id="gallery">
+      <thead>
+      <tr>
+        <th>이미지</th>
+        <th>Title</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="item : ${itemList}">
+        <td th:text="${item.firstImage}">이미지</td>
+        <td th:text="${item.title}">Title</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
