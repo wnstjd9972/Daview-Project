@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>전국 구석구석</title>
 
+  <link th:href="@{/css/fall.css}" rel="stylesheet" />
   <link th:href="@{/css/main.css}" rel="stylesheet" />
   <link rel="shortcut icon" th:href="@{/image/web_logo.png}"/>
   <script type="text/javascript"
@@ -70,17 +71,21 @@
 
 <div class="container">
   <div class="map-container">
-    <table id="gallery">
-      <thead>
+    <table id="gallery" class="_12jHn forum-card-background-color forum-card-border-color category-list-item hv6Wy _2Xy4L" style="border-width: 0px;">
+      <thead style="color: inherit;">
       <tr>
         <th>이미지</th>
         <th>Title</th>
       </tr>
       </thead>
-      <tbody>
+      <tbody class="_38E54" style="position: absolute; left: 0px; top: 0px;">
       <tr th:each="item : ${itemList}">
-        <td th:text="${item.firstImage}">이미지</td>
-        <td th:text="${item.title}">Title</td>
+        <td>
+          <img th:src="${item.firstImage}" width="500px" height="300px">
+        </td>
+        <td>
+          <a th:text="${item.title}" href="/daview/detail/${item.title}">Title</a>
+        </td>
       </tr>
       </tbody>
     </table>
