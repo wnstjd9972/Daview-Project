@@ -7,8 +7,12 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 import kr.re.kitri.daview.model.Item;
 import kr.re.kitri.daview.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.http.HttpEncodingProperties;
+import org.springframework.boot.web.servlet.filter.OrderedCharacterEncodingFilter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -52,7 +56,7 @@ public class HelloController {
 
     @RequestMapping("/daview/fall")
     public  ModelAndView daviewFall() throws Exception {
-        List<Item> itemList = mainService.getValue(new Item());
+        List<Item> itemList = mainService.getValue();
         ModelAndView mav = new ModelAndView("/season/fall");
         mav.addObject("itemList",itemList);
         return mav;
@@ -65,6 +69,13 @@ public class HelloController {
         //model.addAttribute("name", "SpringBlog from Millky");
         return "/season/winter";
     }
+
+    @RequestMapping(value = "/daview/detail/{item}")
+    public String detailView(@PathVariable String item) {
+        System.out.println(item + "........................................");
+        return "/season/detail";
+    }
+
 
     @RequestMapping("/test")
     public void restClient() throws Exception {
