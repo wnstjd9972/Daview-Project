@@ -19,7 +19,8 @@ public class MainDao {
     public List<Item> getXY() {
 
        Connection con  = insertService.getConnection();
-       String query = "select * from festival;";List<Item> itemArrayList = new ArrayList<>();
+       String query = "select * from festival;";
+       List<Item> itemArrayList = new ArrayList<>();
        Item item;
         try {
             PreparedStatement pstmt = con.prepareStatement(query);
@@ -36,7 +37,7 @@ public class MainDao {
                 item.setMapY(rs.getDouble(8));
                 item.setReadCount(rs.getInt(9));
                 item.setTel(rs.getString(10));
-                item.setTitle(rs.getString(11));
+                item.setTitle(rs.getString( 11));
                 itemArrayList.add(item);
 
             }

@@ -2,7 +2,6 @@ package kr.re.kitri.daview;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,7 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 @Service
-public class InsertService {
+public class    InsertService {
     private static String Address;
     private static URL url;
     private static BufferedReader br;

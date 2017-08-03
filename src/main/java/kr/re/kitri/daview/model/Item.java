@@ -13,13 +13,13 @@ public class Item {
     private double mapY;
     private int readCount;
     private String tel;
-    private Object title;
+    private String title;
 
     public Item() {
 
     }
 
-    public Item(int areaCode, String addr1, int contentId, Date eventStartDate, Date eventEndDate, Object firstImage, int mapX, int mapY, int readCount, String tel, Object title) {
+    public Item(int areaCode, String addr1, int contentId, Date eventStartDate, Date eventEndDate, Object firstImage, int mapX, int mapY, int readCount, String tel, String title) {
         this.areaCode = areaCode;
         this.addr1 = addr1;
         this.contentId = contentId;
@@ -117,7 +117,7 @@ public class Item {
         return title;
     }
 
-    public void setTitle(Object title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
