@@ -19,7 +19,8 @@ public class RankDao {
     InsertService insertService;
 
     public List<Rank> getRankFestival() {
-        String query = "SELECT title, add1, readCount, eventStartDate, eventEndDate FROM festival LIMIT 10";
+        String query = "SELECT title, addr1, readCount, eventStartDate, eventEndDate FROM festival " +
+                "ORDER BY readCount DESC LIMIT 10";
 
         //return jdbcTemplate.query(query, new BeanPropertyRowMapper<Rank>(Rank.class));
 
