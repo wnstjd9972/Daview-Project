@@ -84,9 +84,7 @@
           <img th:src="${item.firstImage}" width="500px" height="300px">
         </td>
         <td>
-          <a th:text="${item.title}" th:href="/daview/detail/${contenId}">Title</a>
-          <a th:href="/daview/detail/$"
-        </td>
+          <a th:text="${item.title}" th:href="@{/daview/detail/} + ${item.contentId}"/>  </td>
       </tr>
       </tbody>
     </table>
