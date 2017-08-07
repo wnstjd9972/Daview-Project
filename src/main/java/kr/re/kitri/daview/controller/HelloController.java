@@ -4,6 +4,7 @@ package kr.re.kitri.daview.controller;
 
 
 import kr.re.kitri.daview.model.Item;
+import kr.re.kitri.daview.service.DetailBoardService;
 import kr.re.kitri.daview.service.MainBoardService;
 import kr.re.kitri.daview.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class HelloController {
 
     @Autowired
     private MainBoardService mainBoardService;
+
+    @Autowired
+    private DetailBoardService detailBoardService;
 
     @RequestMapping("/daview")
     public ModelAndView main(){
@@ -56,9 +60,9 @@ public class HelloController {
         return mav;
     }
 
-    @RequestMapping("/daview/detail/{contenId}")
-    public ModelAndView daviewDetail(@PathVariable String contenId) {
-        List<Item> itemList = mainService.getValue();
+    @RequestMapping("/daview/detail/{contentId}")
+    public ModelAndView daviewDetail(@PathVariable int contentId) {
+        List<Item> itemList = detailBoardService.viewDetail(contentId);
         ModelAndView mav = new ModelAndView("/season/detail");
         mav.addObject("itemList",itemList);
         return mav;
