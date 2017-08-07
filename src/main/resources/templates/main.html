@@ -88,16 +88,16 @@
 
             <script th:inline="javascript">
                 //지도를 삽입할 HTML 엘리먼트 또는 HTML 엘리먼트의 id를 지정합니다.
-                var mapDiv = document.getElementById('map'); // 'map' 으로 선언해도 동일
+                var mapDiv = document.getElementById('map');
                 var naverMapOptions = {
                     center: new naver.maps.LatLng(36, 127),
                     zoom: 2,
                     mapTypeId: naver.maps.MapTypeId.NORMAL,
                     mapTypeControl: true
                 };
-                //클러스터 마커를 표시할 좌표 저장소
+                //클러스터 마커를 표시할 배열입니다.
                 var markers = [];
-                //클러스터화 할 때 필요한 것?
+                //클러스터 이미지 파일입니다.
                 var htmlMarker1 = {
                         // language=HTML
                         content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster-marker-1.png);background-size:contain;"></div>',
@@ -131,22 +131,25 @@
                     onLoad()
                 };
 
+                //마커 클러스터를 표현할 함수입니다.
                 function onLoad() {
                     var item = [[${item}]];
                     var date = new Date();
                     var today = date;
                     var latlng;
-                    //item 의 날짜를 받아서 모든 년도를 2017년으로 셋팅합니다.
+                    //item 의 날짜를 받아서 모든 년도를 2017년으로 셋팅합니다.(축제에 과거 데이터가 있기 때문입니다.)
                     for (var i = 0; i < item.length; i++) {
                         var sday = new Date(item[i].eventStartDate);
                         var eday = new Date(item[i].eventEndDate);
                         sday.setYear(today.getFullYear());
                         eday.setYear(today.getFullYear());
+                        //모든 년도를 2017년으로 고정 하였기 때문에
+                        //2015년 12월에 시작하고 2016년 1월에 끝난 축제가 모두 2017년으로 넘어가기 때문에
+                        //축제의 끝과 시작이 반대일경우 끝나는 년도에 1을 더합니다.
                         if (eday < sday) {
                             eday.setYear((today.getFullYear()) + 1)
                         }
-                        //오늘 날짜에서 셋팅된 날짜의 값을 계산하여 행사가 진행중이거나 행사의 당일인 경우 ingData로 보냅니다.
-                        //반대로 행사가 진행중이 아니라면 willData로 값을 보냅니다.
+                        //오늘 날짜에서 축제 날짜를 비교하여 현재 진행중인 축제일 경우 마커를 표시할 XY좌표를 넘깁니다.
                         if (today < sday) {
                         }
                         else if (today >= sday) {
@@ -170,6 +173,7 @@
                             markers.push(marker);
                         }
                     }
+                    //마커클러스터화 시킵니다.
                     var markerClustering = new MarkerClustering({
                         minClusterSize: 2,
                         maxZoom: 8,
@@ -184,7 +188,6 @@
                         }
                     });
                 }
-
             </script>
         </div>
         <div class="map-content" id="map-content">
