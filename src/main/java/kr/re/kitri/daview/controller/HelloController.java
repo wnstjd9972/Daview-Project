@@ -5,11 +5,9 @@ package kr.re.kitri.daview.controller;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import kr.re.kitri.daview.model.Item;
+import kr.re.kitri.daview.service.MainBoardService;
 import kr.re.kitri.daview.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.http.HttpEncodingProperties;
-import org.springframework.boot.web.servlet.filter.OrderedCharacterEncodingFilter;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,11 +27,13 @@ public class HelloController {
     @Autowired
     private MainService mainService;
 
+    @Autowired
+    private MainBoardService mainBoardService;
+
     @RequestMapping("/daview")
-    public ModelAndView main(Item item){
-        List<Item> list = mainService.getValue(item);
+    public ModelAndView main(){
         return new ModelAndView("main")
-                .addObject("item",list);
+                .addObject("item", mainService.getValue());
     }
 
     @RequestMapping("/daview/all")
@@ -54,14 +54,21 @@ public class HelloController {
         return "/season/summer";
     }
 
+
     @RequestMapping("/daview/fall")
     public  ModelAndView daviewFall() throws Exception {
-        List<Item> itemList = mainService.getValue();
+        List<Item> itemList = mainBoardService.getBoardValue();
         ModelAndView mav = new ModelAndView("/season/fall");
         mav.addObject("itemList",itemList);
         return mav;
-        //model.addAttribute("name", "SpringBlog from Millky");
-        //return "/season/fall";
+    }
+
+    @RequestMapping("/daview/detail/{contenId}")
+    public ModelAndView daviewDetail(@PathVariable String contenId) {
+        List<Item> itemList = mainService.getValue();
+        ModelAndView mav = new ModelAndView("/season/detail");
+        mav.addObject("itemList",itemList);
+        return mav;
     }
 
     @RequestMapping("/daview/winter")
@@ -69,13 +76,6 @@ public class HelloController {
         //model.addAttribute("name", "SpringBlog from Millky");
         return "/season/winter";
     }
-
-    @RequestMapping(value = "/daview/detail/{item}")
-    public String detailView(@PathVariable String item) {
-        System.out.println(item + "........................................");
-        return "/season/detail";
-    }
-
 
     @RequestMapping("/test")
     public void restClient() throws Exception {
@@ -137,7 +137,7 @@ public class HelloController {
 
         rd.close();
         conn.disconnect();
-//        System.out.println(sb.toString());
+        System.out.println(sb.toString());
     }
 
 
