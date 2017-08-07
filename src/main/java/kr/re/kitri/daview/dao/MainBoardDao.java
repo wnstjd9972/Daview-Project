@@ -22,7 +22,7 @@ public class MainBoardDao {
     public List<Item> getBoard() {
 
         Connection con  = insertService.getConnection();
-        String query = "select firstImage, title, contenId from festival order by readCount limit 10;";
+        String query = "select firstImage, title, contentId from festival order by readCount limit 10;";
         List<Item> itemArrayList = new ArrayList<>();
         Item item;
         try {
