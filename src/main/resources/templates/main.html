@@ -1,8 +1,8 @@
-    <!DOCTYPE html>
-    <html lang="en" xmlns:th="http://www.thymeleaf.org"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://www.thymeleaf.org ">
-    <head>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>전국 구석구석</title>
@@ -81,18 +81,16 @@
             <div id="map" style="width:100%;height:100%;"></div>
             <div class="map-tab">
                 <div class="i-field">
-                    <input type="text" class="text" id="officetel-textfield" style="" placeholder="원하시는 지역명, 지하철역, 오피스텔명을 입력해주세요" />
-                    <input type="text" class="text" id="rooms-textfield" style="display:block;" placeholder="원하시는 지역명, 지하철역을 입력해주세요" />
-                    <button class="delete_text" id="btn-room-delete"><img src="//s.zigbang.com/v2/web/search/ic-delete2x.png" width="28" alt="닫기"></button>
-                    <button class="delete_text" id="btn-officetel-delete"><img src="//s.zigbang.com/v2/web/search/ic-delete2x.png" width="28" alt="닫기"></button>
+                    <input type="text" class="text" id="search" style="display:block;"
+                           placeholder="원하시는 지역명, 축제명을 입력해주세요"/>
                     <button type="button" id="btn-room-search" style="display:block;">찾아보기</button>
-                    <button type="button" id="btn-officetel-search" style="">찾아보기</button>
                 </div>
             </div>
 
             <div class="searchbox-btn" id="searchbox-btn">
-                <button type="button" id="serach-open"><img src="//s.zigbang.com/v2/danji/btn_search_open.png" /></button>
-                <button type="button" id="serach-close" class="on"><img src="//s.zigbang.com/v2/danji/btn_search_close.png" /></button>
+                <button type="button" id="serach-open"><img th:src="@{image/search/btn_search_open.png}"/></button>
+                <button type="button" id="serach-close"><img th:src="@{image/search/btn_search_close.png}"/>
+                </button>
             </div>
 
 
