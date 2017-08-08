@@ -238,6 +238,7 @@ button {
     line-height: 20px;
 }
 .map-area .map-tab {
+    opacity: 0.8;
     display: block;
     position: absolute;
     left: 57px;
@@ -369,6 +370,20 @@ button {
     width: 30%;
     margin-bottom: 3px;
 }
+
+.list-item {
+    position: relative;
+    padding: 12px 0 0 115px;
+    width: 200px;
+    height: 78px;
+    overflow: hidden;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    background: none;
+}
+
+
 /* 버튼 */
 .button {
     background-color: #4CAF50; /* Green */

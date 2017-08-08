@@ -26,7 +26,7 @@
 
         <ul id="gnb-container">
             <li class="has_d2">
-                <a href="/">계절별 축제
+                <a>계절별 축제
                     <small>봄/여름/가을/겨울</small>
                 </a>
 
@@ -40,7 +40,7 @@
             </li>
 
             <li class="has_d2">
-                <a href="/search/map">테마별 축제
+                <a>테마별 축제
                     <small>불꽃놀이/해변축제/꽃축제</small>
                 </a>
 
@@ -89,7 +89,7 @@
 
             <div class="searchbox-btn" id="searchbox-btn">
                 <button type="button" id="serach-open"><img th:src="@{image/search/btn_search_open.png}"/></button>
-                <button type="button" id="serach-close"><img th:src="@{image/search/btn_search_close.png}"/>
+                <button type="buton" tid="serach-close"><img th:src="@{image/search/btn_search_close.png}"/>
                 </button>
             </div>
 
@@ -98,7 +98,6 @@
         <div class="map-content" id="map-content">
             <!-- search -->
             <div class="map-search">
-
                 <div class="item-deposit">
                     <h4>계절</h4>
                     <select id="season" name="seaon">
@@ -109,7 +108,6 @@
                         <option value="겨울">겨울</option>
                     </select>
                 </div>
-
                 <div class="item-deposit">
                     <h4>테마</h4>
                     <select id="thema" name="thema">
@@ -128,29 +126,26 @@
                         <option value="부산">부산</option>
                     </select>
                 </div>
-
-
-                <div class="item-type">
-                    <h4>정렬</h4>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="01" check/> 랭킹순</label>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="02" check/> 이름순</label>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="03" check/> 이름순(역행)</label>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="04" check/> 별점순</label>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="05" check/> HOT</label>
+            </div>
+            <div class="container" style="overflow:auto;" id="itemList">
+                <div class="list-item">
+                    <div class="i-img">
+                        
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 <script th:inline="javascript">
+    //item 객체를 받아와서 thymeleaf 형태로 변환
     var item = [[${item}]];
+    //id가 map인 태그에 지도 형성
     var map = setMap('map');
+    //클러스터맵 형성
     clusterMap(map, item);
+
 </script>
 </body>
 </html>
