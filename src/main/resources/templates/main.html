@@ -14,6 +14,7 @@
     <script type="text/javascript" th:src="@{js/MarkerClustering.js}"></script>
     <script type="text/javascript" th:src="@{js/NaverMap.js}"></script>
     <script type="text/javascript" th:src="@{js/DataExtract.js}"></script>
+    <script type="text/javascript" th:src="@{js/FestivalList.js}"></script>
 </head>
 <body>
 
@@ -81,15 +82,17 @@
             <div id="map" style="width:100%;height:100%;"></div>
             <div class="map-tab">
                 <div class="i-field">
-                    <input type="text" class="text" id="search" style="display:block;"
-                           placeholder="원하시는 지역명, 축제명을 입력해주세요"/>
-                    <button type="button" id="btn-room-search" style="display:block;">찾아보기</button>
+                    <input type="text" id="search_fest" class="text" style="display:block;" name="search_fest"
+                           placeholder="원하시는 지역명, 축제명을 입력해주세요">
+                    <button type="button" name="btn-room-search" id="btn-room-search" style="display:block;"
+                            th:onclick="'javascript:getFestList();'" >찾아보기
+                    </button>
                 </div>
             </div>
 
             <div class="searchbox-btn" id="searchbox-btn">
                 <button type="button" id="serach-open"><img th:src="@{image/search/btn_search_open.png}"/></button>
-                <button type="buton" tid="serach-close"><img th:src="@{image/search/btn_search_close.png}"/>
+                <button type="buton" id="serach-close"><img th:src="@{image/search/btn_search_close.png}"/>
                 </button>
             </div>
 
@@ -129,9 +132,6 @@
             </div>
             <div class="container" style="overflow:auto;" id="itemList">
                 <div class="list-item">
-                    <div class="i-img">
-                        
-                    </div>
                 </div>
 
             </div>
@@ -139,12 +139,15 @@
     </div>
 </div>
 <script th:inline="javascript">
+
     //item 객체를 받아와서 thymeleaf 형태로 변환
     var item = [[${item}]];
     //id가 map인 태그에 지도 형성
     var map = setMap('map');
     //클러스터맵 형성
     clusterMap(map, item);
+
+
 
 </script>
 </body>

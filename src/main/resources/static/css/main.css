@@ -253,7 +253,7 @@ button {
 .map-area .map-tab .i-field {
     position: relative;
 }
-.map-area .map-tab .text {
+.map-area .map-tab .i-field .text {
     display: none;
     font-size: 12px;
     color: black;
