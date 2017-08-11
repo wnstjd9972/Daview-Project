@@ -12,6 +12,11 @@
             src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
     <script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}"></script>
     <script type="text/javascript" th:src="@{js/MarkerClustering.js}"></script>
+
+    <script type="text/javascript"
+            src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript"
+            src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 
@@ -65,15 +70,15 @@
 
     <div class="top_btn">
         <div class="bx_user">
-            <!--<button type="button" id="exBtn"  href="/daview/login">로그인</button>
-            네이버아이디로로그인 버튼 노출 영역 -->
+            <!--<button type="button" id="exBtn"  href="/daview/login">로그인</button>-->
+            <!--네이버아이디로로그인 버튼 노출 영역-->
             <div id="naver_id_login"></div>
             <!-- //네이버아이디로로그인 버튼 노출 영역 -->
             <script type="text/javascript">
                 var naver_id_login = new naver_id_login("OTNX3GqXL6QApWpE792k", "http://localhost:8080/daview");
                 var state = naver_id_login.getUniqState();
 
-                naver_id_login.setButton("green", 2,30);
+                naver_id_login.setButton("green_login.png", 2,30);
                 naver_id_login.setDomain("http://localhost:8080/daview");
                 naver_id_login.setState(state);
                 naver_id_login.setPopup();
@@ -84,13 +89,6 @@
         </div>
     </div>
 </div>
-
-<!--<tr th:each="user : ${item}">
-<td th:text="${user.mapX}">emil</td>
-<td th:text="${user.mapY}">name</td>
-<td th:text="${user.eventEndDate}">stat</td>
-<td th:text="${user.eventStartDate}">super</td>
-</tr>-->
 
 <div class="container">
 
@@ -104,7 +102,7 @@
                     <input type="text" id="search_fest" class="text" style="display:block;" name="search_fest"
                            placeholder="원하시는 지역명, 축제명을 입력해주세요">
                     <button type="button" name="btn-room-search" id="btn-room-search" style="display:block;"
-                            th:onclick="'javascript:getFestList();'" >찾아보기
+                            th:onclick="'javascript:getFestList();'">찾아보기
                     </button>
                 </div>
             </div>
