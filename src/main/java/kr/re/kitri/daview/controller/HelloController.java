@@ -1,12 +1,10 @@
 package kr.re.kitri.daview.controller;
 
-
-
-
 import kr.re.kitri.daview.model.Item;
 import kr.re.kitri.daview.service.DetailBoardService;
 import kr.re.kitri.daview.service.MainBoardService;
 import kr.re.kitri.daview.service.MainService;
+import kr.re.kitri.daview.service.RankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +23,9 @@ public class HelloController {
     private MainBoardService mainBoardService;
 
     @Autowired
+    private RankService rankService;
+
+    @Autowired
     private DetailBoardService detailBoardService;
 
     @RequestMapping("/daview")
@@ -33,21 +34,25 @@ public class HelloController {
                 .addObject("item", mainService.getValue());
     }
 
+    @RequestMapping("/daview/rank")
+    public ModelAndView daviewRank(){
+        return new ModelAndView("rank")
+                .addObject("Rank", rankService.getRank());
+    }
+
+
     @RequestMapping("/daview/all")
     public  String daviewAll(Model model) {
-        //model.addAttribute("name", "SpringBlog from Millky");
         return "/season/all";
     }
 
     @RequestMapping("/daview/spring")
     public  String daviewSpring(Model model) {
-        //model.addAttribute("name", "SpringBlog from Millky");
         return "/season/spring";
     }
 
     @RequestMapping("/daview/summer")
     public  String daviewSummer(Model model) {
-        //model.addAttribute("name", "SpringBlog from Millky");
         return "/season/summer";
     }
 
@@ -70,7 +75,7 @@ public class HelloController {
 
     @RequestMapping("/daview/winter")
     public  String daviewWinter(Model model) {
-        //model.addAttribute("name", "SpringBlog from Millky");
         return "/season/winter";
     }
+
 }

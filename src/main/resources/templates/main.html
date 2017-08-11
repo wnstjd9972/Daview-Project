@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.thymeleaf.org " xmlns:overflow-y="http://www.w3.org/1999/xhtml">
+      xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -85,7 +85,7 @@
                     <input type="text" id="search_fest" class="text" style="display:block;" name="search_fest"
                            placeholder="원하시는 지역명, 축제명을 입력해주세요">
                     <button type="button" name="btn-room-search" id="btn-room-search" style="display:block;"
-                            th:onclick="'javascript:getFestList();'">찾아보기
+                            th:onclick="'javascript:getFestList();'" >찾아보기
                     </button>
                 </div>
             </div>
@@ -114,7 +114,6 @@
                 <div class="item-deposit">
                     <h4>테마</h4>
                     <select id="thema" name="thema">
-
                         <option value="전체">전체</option>
                         <option value="불꽃놀이">불꽃놀이</option>
                         <option value="해변축제">해변축제</option>
@@ -131,7 +130,10 @@
                     </select>
                 </div>
             </div>
-                <div class="container2" id="itemList">
+            <div class="container" style="overflow:auto;" id="itemList">
+                <div class="list-item">
+                </div>
+
             </div>
         </div>
     </div>
@@ -144,6 +146,7 @@
     var map = setMap('map');
     //클러스터맵 형성
     clusterMap(map, item);
+
 
 
 </script>

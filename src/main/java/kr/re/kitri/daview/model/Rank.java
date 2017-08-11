@@ -1,22 +1,16 @@
 package kr.re.kitri.daview.model;
 
 
+import java.sql.Date;
+
 public class Rank {
     private String title;
     private String addr1;
     private int readCount;
-    private int eventStartDate;
-    private int eventEndDate;
+    private Date eventStartDate;
+    private Date eventEndDate;
 
-    @Override
-    public String toString() {
-        return "Rank{" +
-                "title='" + title + '\'' +
-                ", addr1='" + addr1 + '\'' +
-                ", readCount=" + readCount +
-                ", eventStartDate=" + eventStartDate +
-                ", eventEndDate=" + eventEndDate +
-                '}';
+    public Rank() {
     }
 
     public String getTitle() {
@@ -43,28 +37,23 @@ public class Rank {
         this.readCount = readCount;
     }
 
-    public int getEventStartDate() {
+    public Date getEventStartDate() {
         return eventStartDate;
     }
 
-    public void setEventStartDate(int eventStartDate) {
+    public void setEventStartDate(Date eventStartDate) {
         this.eventStartDate = eventStartDate;
     }
 
-    public int getEventEndDate() {
+    public Date getEventEndDate() {
         return eventEndDate;
     }
 
-    public void setEventEndDate(int eventEndDate) {
+    public void setEventEndDate(Date eventEndDate) {
         this.eventEndDate = eventEndDate;
     }
 
-    public Rank() {
-
-    }
-
-    public Rank(String title, String addr1, int readCount, int eventStartDate, int eventEndDate) {
-
+    public Rank(String title, String addr1, int readCount, Date eventStartDate, Date eventEndDate) {
         this.title = title;
         this.addr1 = addr1;
         this.readCount = readCount;
