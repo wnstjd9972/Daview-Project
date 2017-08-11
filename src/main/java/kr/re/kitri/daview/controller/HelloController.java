@@ -1,18 +1,26 @@
 package kr.re.kitri.daview.controller;
 
 
+
+
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import kr.re.kitri.daview.model.Item;
 import kr.re.kitri.daview.service.MainBoardService;
 import kr.re.kitri.daview.service.MainService;
-import kr.re.kitri.daview.service.RankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
+
 
 @Controller
 public class HelloController {
@@ -21,9 +29,6 @@ public class HelloController {
 
     @Autowired
     private MainBoardService mainBoardService;
-
-    @Autowired
-    private RankService rankService;
 
     @RequestMapping("/daview")
     public ModelAndView main(){
@@ -40,16 +45,19 @@ public class HelloController {
 
     @RequestMapping("/daview/all")
     public  String daviewAll(Model model) {
+        //model.addAttribute("name", "SpringBlog from Millky");
         return "/season/all";
     }
 
     @RequestMapping("/daview/spring")
     public  String daviewSpring(Model model) {
+        //model.addAttribute("name", "SpringBlog from Millky");
         return "/season/spring";
     }
 
     @RequestMapping("/daview/summer")
     public  String daviewSummer(Model model) {
+        //model.addAttribute("name", "SpringBlog from Millky");
         return "/season/summer";
     }
 
@@ -62,9 +70,9 @@ public class HelloController {
         return mav;
     }
 
-    @RequestMapping("/daview/detail/{contenId}")
-    public ModelAndView daviewDetail(@PathVariable String contenId) {
-        List<Item> itemList = mainService.getValue();
+    @RequestMapping("/daview/detail/{contentId}")
+    public ModelAndView daviewDetail(@PathVariable int contentId) {
+        List<Item> itemList = detailBoardService.viewDetail(contentId);
         ModelAndView mav = new ModelAndView("/season/detail");
         mav.addObject("itemList",itemList);
         return mav;
@@ -72,12 +80,8 @@ public class HelloController {
 
     @RequestMapping("/daview/winter")
     public  String daviewWinter(Model model) {
+        //model.addAttribute("name", "SpringBlog from Millky");
         return "/season/winter";
     }
-
-
-
-
-
 
 }

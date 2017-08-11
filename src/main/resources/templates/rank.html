@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymleaf.org">
-
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>전국 구석구석</title>
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
-    <link rel="shortcut icon" th:href="@{/image/favicon.ico}"/>
+    <link rel="shortcut icon" th:href="@{/image/logo/favicon.ico}"/>
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf&submodules=panorama,geocoder,visualization"></script>
 </head>
@@ -15,7 +16,7 @@
 
 <div class="header">
     <h1><a href="/daview">
-        <img class="Logo" th:src="@{/image/project_logo.png}" alt="다뷰"/>
+        <img class="Logo" th:src="@{/image/logo/project_logo.png}" alt="다뷰"/>
     </a></h1>
 
     <div class="gnb">

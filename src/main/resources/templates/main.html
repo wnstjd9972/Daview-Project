@@ -6,32 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>전국 구석구석</title>
-    <!--<link rel="stylesheet" th:href="@{/css/bootstrap.css}">-->
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
-    <link rel="shortcut icon" th:href="@{/image/favicon.ico}"/>
+    <link rel="shortcut icon" th:href="@{/image/logo/favicon.ico}"/>
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
-    <!--<script type="text/javascript" th:src="@{js/bootstrap.js}"></script>-->
     <script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}"></script>
     <script type="text/javascript" th:src="@{js/MarkerClustering.js}"></script>
-
-    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-
 </head>
 <body>
 
 <div class="header">
     <h1><a href="/daview">
-        <img class="Logo" th:src="@{/image/project_logo.png}" alt="다뷰"/>
+        <img class="Logo" th:src="@{/image/logo/project_logo.png}" alt="다뷰"/>
     </a></h1>
 
     <div class="gnb">
 
         <ul id="gnb-container">
             <li class="has_d2">
-                <a href="/">
+                <a>계절별 축제
                     <small>봄/여름/가을/겨울</small>
                 </a>
 
@@ -45,7 +38,7 @@
             </li>
 
             <li class="has_d2">
-                <a href="/search/map">테마별 축제
+                <a>테마별 축제
                     <small>불꽃놀이/해변축제/꽃축제</small>
                 </a>
 
@@ -66,6 +59,7 @@
             <li class="has_d2">
                 <a href="/">고객센터</a>
             </li>
+
         </ul>
     </div>
 
@@ -89,9 +83,14 @@
 
         </div>
     </div>
-
 </div>
 
+<!--<tr th:each="user : ${item}">
+<td th:text="${user.mapX}">emil</td>
+<td th:text="${user.mapY}">name</td>
+<td th:text="${user.eventEndDate}">stat</td>
+<td th:text="${user.eventStartDate}">super</td>
+</tr>-->
 
 <div class="container">
 
@@ -100,106 +99,23 @@
     <div class="map-container">
         <div class="map-area">
             <div id="map" style="width:100%;height:100%;"></div>
+            <div class="map-tab">
+                <div class="i-field">
+                    <input type="text" id="search_fest" class="text" style="display:block;" name="search_fest"
+                           placeholder="원하시는 지역명, 축제명을 입력해주세요">
+                    <button type="button" name="btn-room-search" id="btn-room-search" style="display:block;"
+                            th:onclick="'javascript:getFestList();'" >찾아보기
+                    </button>
+                </div>
+            </div>
 
-            <script th:inline="javascript">
-                //지도를 삽입할 HTML 엘리먼트 또는 HTML 엘리먼트의 id를 지정합니다.
-                var mapDiv = document.getElementById('map');
-                var naverMapOptions = {
-                    center: new naver.maps.LatLng(36, 127),
-                    zoom: 2,
-                    mapTypeId: naver.maps.MapTypeId.NORMAL,
-                    mapTypeControl: true
-                };
-                //클러스터 마커를 표시할 배열입니다.
-                var markers = [];
-                //클러스터 이미지 파일입니다.
-                var htmlMarker1 = {
-                        // language=HTML
-                        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster-marker-1.png);background-size:contain;"></div>',
-                        size: N.Size(40, 40),
-                        anchor: N.Point(20, 20)
-                    },
-                    htmlMarker2 = {
-                        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster-marker-2.png);background-size:contain;"></div>',
-                        size: N.Size(40, 40),
-                        anchor: N.Point(20, 20)
-                    },
-                    htmlMarker3 = {
-                        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster-marker-3.png);background-size:contain;"></div>',
-                        size: N.Size(40, 40),
-                        anchor: N.Point(20, 20)
-                    },
-                    htmlMarker4 = {
-                        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster-marker-4.png);background-size:contain;"></div>',
-                        size: N.Size(40, 40),
-                        anchor: N.Point(20, 20)
-                    },
-                    htmlMarker5 = {
-                        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster-marker-5.png);background-size:contain;"></div>',
-                        size: N.Size(40, 40),
-                        anchor: N.Point(20, 20)
-                    };
-                //옵션 없이 지도 객체를 생성하면 서울시청을 중심으로 하는 11레벨의 지도가 생성됩니다.
-                var map = new naver.maps.Map(mapDiv, naverMapOptions);
+            <div class="searchbox-btn" id="searchbox-btn">
+                <button type="button" id="serach-open"><img th:src="@{image/search/btn_search_open.png}"/></button>
+                <button type="buton" id="serach-close"><img th:src="@{image/search/btn_search_close.png}"/>
+                </button>
+            </div>
 
 
-                //마커 클러스터를 표현할 함수입니다.
-                var item = [[${item}]];
-                var date = new Date();
-                var today = date;
-                var latlng;
-                //item 의 날짜를 받아서 모든 년도를 2017년으로 셋팅합니다.(축제에 과거 데이터가 있기 때문입니다.)
-                for (var i = 0; i < item.length; i++) {
-                    var sday = new Date(item[i].eventStartDate);
-                    var eday = new Date(item[i].eventEndDate);
-                    sday.setYear(today.getFullYear());
-                    eday.setYear(today.getFullYear());
-                    //모든 년도를 2017년으로 고정 하였기 때문에
-                    //2015년 12월에 시작하고 2016년 1월에 끝난 축제가 모두 2017년으로 넘어가기 때문에
-                    //축제의 끝과 시작이 반대일경우 끝나는 년도에 1을 더합니다.
-                    if (eday < sday) {
-                        eday.setYear((today.getFullYear()) + 1)
-                    }
-                    //오늘 날짜에서 축제 날짜를 비교하여 현재 진행중인 축제일 경우 마커를 표시할 XY좌표를 넘깁니다.
-                    if (today < sday) {
-                    }
-                    else if (today >= sday) {
-                        if (today <= eday) {
-                            latlng = new naver.maps.LatLng(item[i].mapY, item[i].mapX),
-                                marker = new naver.maps.Marker({
-                                    position: latlng,
-                                    draggable: true
-                                });
-                            markers.push(marker);
-                        }
-                        else {
-                        }
-                    }
-                    else {
-                        latlng = new naver.maps.LatLng(item[i].mapY, item[i].mapX),
-                            marker = new naver.maps.Marker({
-                                position: latlng,
-                                draggable: true
-                            });
-                        markers.push(marker);
-                    }
-                }
-                //마커클러스터화 시킵니다.
-                var markerClustering = new MarkerClustering({
-                    minClusterSize: 2,
-                    maxZoom: 8,
-                    map: map,
-                    markers: markers,
-                    disableClickZoom: false,
-                    gridSize: 120,
-                    icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
-                    indexGenerator: [1, 5, 10, 20, 30],
-                    stylingFunction: function (clusterMarker, count) {
-                        $(clusterMarker.getElement()).find('div:first-child').text(count);
-                    }
-                });
-
-            </script>
         </div>
         <div class="map-content" id="map-content">
             <!-- search -->
@@ -234,33 +150,14 @@
                         <option value="부산">부산</option>
                     </select>
                 </div>
-
-
-                <div class="item-type">
-                    <h4>정렬</h4>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="01" check/> 랭킹순</label>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="02" check/> 이름순</label>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="03" check/> 이름순(역행)</label>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="04" check/> 별점순</label>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="05" check/> HOT</label>
+            </div>
+            <div class="container" style="overflow:auto;" id="itemList">
+                <div class="list-item">
                 </div>
+
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script>
-<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script>
-
 </body>
 </html>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,14 +10,14 @@
 
     <link th:href="@{/css/fall.css}" rel="stylesheet" />
     <link th:href="@{/css/main.css}" rel="stylesheet" />
-    <link rel="shortcut icon" th:href="@{/image/web_logo.png}"/>
+    <link rel="shortcut icon" th:href="@{/image/logo/favicon.ico}"/>
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
 </head>
 <body>
 <div class="header">
     <h1><a href="/daview">
-        <img class="Logo" th:src="@{/image/project_logo.png}" alt="다뷰"/>
+        <img class="Logo" th:src="@{/image/logo/project_logo.png}" alt="다뷰"/>
     </a></h1>
 
     <div class="gnb">
@@ -71,7 +73,35 @@
 
 <div class="container">
     <div class="map-container">
-      <p th:value ="${title}"> 축제 상세보기 페이지</p>
+        <table id="userDetailTable">
+            <thead>
+            <tr>
+                <th>주소</th>
+                <th>시작날짜</th>
+                <th>끝나는날짜</th>
+                <th>이미지</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>조회수</th>
+                <th>전화번호</th>
+                <th>제목</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${itemList}">
+              
+                <td th:text="${item.addr1}">주소</td>
+                <td th:text="${item.eventStartDate}">시작날짜</td>
+                <td th:text="${item.eventEndDate}">끝나는날짜</td>
+                <td><img th:src="${item.firstImage}" width="500px" height="300px"></td>
+                <td th:text="${item.mapX}">X</td>
+                <td th:text="${item.mapY}">Y</td>
+                <td th:text="${item.readCount}">조회수</td>
+                <td th:text="${item.tel}">전화번호</td>
+                <td th:text="${item.title}">제목</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>
