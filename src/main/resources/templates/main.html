@@ -6,12 +6,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>전국 구석구석</title>
+    <!--<link rel="stylesheet" th:href="@{/css/bootstrap.css}">-->
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
     <link rel="shortcut icon" th:href="@{/image/favicon.ico}"/>
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
+    <!--<script type="text/javascript" th:src="@{js/bootstrap.js}"></script>-->
     <script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}"></script>
     <script type="text/javascript" th:src="@{js/MarkerClustering.js}"></script>
+
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+
 </head>
 <body>
 
@@ -59,24 +66,32 @@
             <li class="has_d2">
                 <a href="/">고객센터</a>
             </li>
-
         </ul>
     </div>
 
     <div class="top_btn">
         <div class="bx_user">
-            <button type="button" id="exBtn">로그인</button>
-            <button type="button">회원가입</button>
+            <!--<button type="button" id="exBtn"  href="/daview/login">로그인</button>
+            네이버아이디로로그인 버튼 노출 영역 -->
+            <div id="naver_id_login"></div>
+            <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+            <script type="text/javascript">
+                var naver_id_login = new naver_id_login("OTNX3GqXL6QApWpE792k", "http://localhost:8080/daview");
+                var state = naver_id_login.getUniqState();
+
+                naver_id_login.setButton("green", 2,30);
+                naver_id_login.setDomain("http://localhost:8080/daview");
+                naver_id_login.setState(state);
+                naver_id_login.setPopup();
+                naver_id_login.redirect("http://localhost:8080/daview");
+                naver_id_login.init_naver_id_login();
+            </script>
+
         </div>
     </div>
+
 </div>
 
-<!--<tr th:each="user : ${item}">
-<td th:text="${user.mapX}">emil</td>
-<td th:text="${user.mapY}">name</td>
-<td th:text="${user.eventEndDate}">stat</td>
-<td th:text="${user.eventStartDate}">super</td>
-</tr>-->
 
 <div class="container">
 
@@ -238,5 +253,14 @@
         </div>
     </div>
 </div>
+
+
+
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script>
+<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script>
+
 </body>
 </html>
