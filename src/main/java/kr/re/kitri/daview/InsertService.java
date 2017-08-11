@@ -1,7 +1,11 @@
 package kr.re.kitri.daview;
+
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,6 +16,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 @Service
 public class    InsertService {
     private static String Address;
@@ -20,7 +25,7 @@ public class    InsertService {
     private static HttpURLConnection conn;
     private static String protocol = "GET";
 
-    public JSONArray getJsonFromApi(String parameter) {
+    public JSONArray getJsonFromApi(String parameter) throws JSONException {
         String point = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival?";
         String serviceKey = "mTy6RIO%2FUanpU8PccBrEB%2BJgzQk5jV%2BbKB2ezfRspybCOoVYDMXegKeGvrzhtwJz44WCumfb%2BbXcBDPf28nLtQ%3D%3D";
         Address = point + "ServiceKey=" + serviceKey + parameter;
@@ -109,8 +114,7 @@ public class    InsertService {
         }
 
         try {
-            conn =
-                    DriverManager.getConnection
+            conn = DriverManager.getConnection
                             (InsertData.DB_URL, InsertData.USERNAME, InsertData.PASSWORD);
             System.out.println("Connection ok..");
         } catch (SQLException e) {

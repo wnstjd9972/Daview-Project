@@ -12,9 +12,11 @@
             src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
     <script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}"></script>
     <script type="text/javascript" th:src="@{js/MarkerClustering.js}"></script>
-    <script type="text/javascript" th:src="@{js/NaverMap.js}"></script>
-    <script type="text/javascript" th:src="@{js/DataExtract.js}"></script>
-    <script type="text/javascript" th:src="@{js/FestivalList.js}"></script>
+
+    <script type="text/javascript"
+            src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript"
+            src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 
@@ -68,11 +70,26 @@
 
     <div class="top_btn">
         <div class="bx_user">
-            <button type="button" id="exBtn">로그인</button>
-            <button type="button">회원가입</button>
+            <!--<button type="button" id="exBtn"  href="/daview/login">로그인</button>-->
+            <!--네이버아이디로로그인 버튼 노출 영역-->
+            <div id="naver_id_login"></div>
+            <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+            <script type="text/javascript">
+                var naver_id_login = new naver_id_login("OTNX3GqXL6QApWpE792k", "http://localhost:8080/daview");
+                var state = naver_id_login.getUniqState();
+
+                naver_id_login.setButton("green_login.png", 2,30);
+                naver_id_login.setDomain("http://localhost:8080/daview");
+                naver_id_login.setState(state);
+                naver_id_login.setPopup();
+                naver_id_login.redirect("http://localhost:8080/daview");
+                naver_id_login.init_naver_id_login();
+            </script>
+
         </div>
     </div>
 </div>
+
 <div class="container">
 
     <!--양옆-->
@@ -85,7 +102,7 @@
                     <input type="text" id="search_fest" class="text" style="display:block;" name="search_fest"
                            placeholder="원하시는 지역명, 축제명을 입력해주세요">
                     <button type="button" name="btn-room-search" id="btn-room-search" style="display:block;"
-                            th:onclick="'javascript:getFestList();'" >찾아보기
+                            th:onclick="'javascript:getFestList();'">찾아보기
                     </button>
                 </div>
             </div>
@@ -101,6 +118,7 @@
         <div class="map-content" id="map-content">
             <!-- search -->
             <div class="map-search">
+
                 <div class="item-deposit">
                     <h4>계절</h4>
                     <select id="season" name="seaon">
@@ -111,6 +129,7 @@
                         <option value="겨울">겨울</option>
                     </select>
                 </div>
+
                 <div class="item-deposit">
                     <h4>테마</h4>
                     <select id="thema" name="thema">
@@ -138,17 +157,5 @@
         </div>
     </div>
 </div>
-<script th:inline="javascript">
-
-    //item 객체를 받아와서 thymeleaf 형태로 변환
-    var item = [[${item}]];
-    //id가 map인 태그에 지도 형성
-    var map = setMap('map');
-    //클러스터맵 형성
-    clusterMap(map, item);
-
-
-
-</script>
 </body>
 </html>

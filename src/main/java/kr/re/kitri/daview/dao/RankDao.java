@@ -2,6 +2,7 @@ package kr.re.kitri.daview.dao;
 
 import kr.re.kitri.daview.InsertService;
 import kr.re.kitri.daview.model.Rank;
+import kr.re.kitri.daview.service.RankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.sql.Connection;
@@ -15,17 +16,14 @@ import java.util.List;
 public class RankDao {
 
     @Autowired
-    //RankService rankService;
-    InsertService insertService;
+    RankService rankService;
+
 
     public List<Rank> getRankFestival() {
         String query = "SELECT title, addr1, readCount, eventStartDate, eventEndDate FROM festival " +
                 "ORDER BY readCount DESC LIMIT 10";
 
-        //return jdbcTemplate.query(query, new BeanPropertyRowMapper<Rank>(Rank.class));
-
-        //Connection conn = dataSource.getConnection();
-        Connection conn  = insertService.getConnection();
+        Connection conn = rankService.getConnection();
 
         List<Rank> rankArrayList = new ArrayList<>();
         Rank rank;
@@ -41,8 +39,8 @@ public class RankDao {
                 rank.setTitle(rs.getString(1));
                 rank.setAddr1(rs.getString(2));
                 rank.setReadCount(rs.getInt(3));
-                rank.setEventStartDate(rs.getInt(4));
-                rank.setEventEndDate(rs.getInt(5));
+                rank.setEventStartDate(rs.getDate(4));
+                rank.setEventEndDate(rs.getDate(5));
 
                 rankArrayList.add(rank);
             }
@@ -51,6 +49,8 @@ public class RankDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
         return rankArrayList;
     }
 

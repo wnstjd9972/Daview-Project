@@ -1,6 +1,6 @@
 package kr.re.kitri.daview;
 
-import kr.re.kitri.daview.InsertService;
+
 import org.json.JSONArray;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
