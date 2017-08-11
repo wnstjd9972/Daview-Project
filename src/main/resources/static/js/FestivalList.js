@@ -33,13 +33,17 @@ function makeFestList(item) {
     for (var i = 0; i < item.length; i++) {
         //Div 태그 만들기
         var iDiv = document.createElement('div');
+        iDiv.className += "list-item";
+        //Img 태그 만들기
         var iImg = document.createElement('img');
         iImg.src += item[i].firstImage;
-        //추가한 Div태그 itemList 자손으로 넣기
-        var list = document.getElementById("itemList").appendChild(iDiv);
-        //클래스를 list-item으로 설정
-        list.className += "list-item";
-        //list 의 자손을 iImg로 가져옴
-        list.appendChild(iImg);
+        //Text 태그 만들기
+        var iText = document.createElement('center');
+        iText.textContent += item[i].title;
+
+        var tagDiv = document.getElementById("itemList").appendChild(iDiv);
+        tagDiv.appendChild(iImg);
+        tagDiv.appendChild(iText);
+
     }
 }
