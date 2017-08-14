@@ -140,9 +140,9 @@
     //item 객체를 받아와서 thymeleaf 형태로 변환
     var item = [[${item}]];
     //id가 map인 태그에 지도 형성
-    var map = setMap('map');
     //클러스터맵 형성
-    clusterMap(map, item);
+    clusterMap(item);
+    makeFestList(ingFilter(item));
 
 
 

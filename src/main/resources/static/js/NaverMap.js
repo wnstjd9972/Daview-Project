@@ -3,23 +3,24 @@
  * @param elementId
  */
 
-function setMap(elementId) {
-    var mapDiv = document.getElementById(elementId);
-    var naverMapOptions = {
+function setMap() {
+    var map = new naver.maps.Map('map', {
         center: new naver.maps.LatLng(36, 127),
         zoom: 2,
         mapTypeId: naver.maps.MapTypeId.NORMAL,
         mapTypeControl: true
-    };
+    });
     //옵션 없이 지도 객체를 생성하면 서울시청을 중심으로 하는 11레벨의 지도가 생성됩니다.
-    var map = new naver.maps.Map(mapDiv, naverMapOptions);
     return map;
 }
 
 
-function insertClusterImformation(item) {
+function insertClusterImformation(item, searchOX) {
     var cluster = ingFilter(item);
     //클러스터화 하기 위한 좌표값을 넣을 배열
+    if (searchOX == true){
+        cluster = item;
+    }
     var markers = [];
     var latlng;
     for (var i = 0; i < cluster.length; i++) {
@@ -34,10 +35,24 @@ function insertClusterImformation(item) {
     return markers;
 }
 
-function clusterMap(map, item) {
+
+function keywordClusterImforamtin(item) {
+    var ri = document.getElementById("map");
+
+    //새로운 검색시 기존 데이터를 삭제
+    while (ri.hasChildNodes()){
+        ri.removeChild(ri.lastChild)
+    }
+
+    clusterMap(item, true)
+}
 
 
-    var markers = insertClusterImformation(item);
+function clusterMap(item, searchOX) {
+    var map = setMap();
+
+
+    var markers = insertClusterImformation(item, searchOX);
 
     //클러스터 이미지 파일입니다.
     var htmlMarker1 = {
