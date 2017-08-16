@@ -48,7 +48,7 @@ var MarkerClustering = function (options) {
     this._markerRelations = [];
 
     this.setOptions(naver.maps.Util.extend({}, this.DEFAULT_OPTIONS, options), true);
-    this.setMap(options.map || null);
+    this.Map(options.map || null);
 };
 
 naver.maps.Util.ClassExtend(MarkerClustering, naver.maps.OverlayView, {

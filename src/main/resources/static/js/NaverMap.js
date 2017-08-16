@@ -2,8 +2,8 @@
  * elementId를 받아서 Map을 형성합니다.
  * @param elementId
  */
-
-function setMap() {
+//기본맵 설정
+function Map() {
     var map = new naver.maps.Map('map', {
         center: new naver.maps.LatLng(36, 127),
         zoom: 2,
@@ -15,9 +15,10 @@ function setMap() {
 }
 
 
-function insertClusterImformation(item, searchOX) {
-    var cluster = ingFilter(item);
-    //클러스터화 하기 위한 좌표값을 넣을 배열
+function changeFestListInClusterLatLng(item, searchOX) {
+    //현재 진행중인 축제를 cluster에 담는다.
+    var cluster = ingFestival(item);
+   //검색어가 있다면
     if (searchOX == true){
         cluster = item;
     }
@@ -36,7 +37,8 @@ function insertClusterImformation(item, searchOX) {
 }
 
 
-function keywordClusterImforamtin(item) {
+function newRequestMap(item) {
+    //함수가 실행되면 기존의 클러스터는 삭제되고 가공된 item을 clusterMap에 넣음으로써 item기반의 새로운 클러스터 지도 형성
     var ri = document.getElementById("map");
 
     //새로운 검색시 기존 데이터를 삭제
@@ -44,15 +46,14 @@ function keywordClusterImforamtin(item) {
         ri.removeChild(ri.lastChild)
     }
 
-    clusterMap(item, true)
+    XYintoClusterMap(item, true)
 }
 
 
-function clusterMap(item, searchOX) {
-    var map = setMap();
-
-
-    var markers = insertClusterImformation(item, searchOX);
+function XYintoClusterMap(item, searchOX) {
+    //클러스터화 시킬 맵을 찾습니다.
+    var map = Map();
+    var markers = changeFestListInClusterLatLng(item, searchOX);
 
     //클러스터 이미지 파일입니다.
     var htmlMarker1 = {

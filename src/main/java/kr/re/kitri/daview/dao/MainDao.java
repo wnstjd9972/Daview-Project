@@ -19,7 +19,7 @@ public class MainDao {
     public List<Item> getXY() {
 
        Connection con  = insertService.getConnection();
-       String query = "select * from festival;";
+       String query = "SELECT * FROM festival ORDER BY readCount;";
        List<Item> itemArrayList = new ArrayList<>();
        Item item;
         try {

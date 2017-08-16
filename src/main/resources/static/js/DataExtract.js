@@ -33,8 +33,8 @@
 //     return ingFestival;
 //
 // }
-
-function ingFilter(item){
+//첫 화면에 보여줄 현재 진행중인 축제를 걸러내는 JS입니다.
+function ingFestival(item){
     //진행중인 축제를 담을 배열 입니다.
     var ingFestival = [];
     //현재 진행중인 축제를 찾아내기 위한 함수입니다.

@@ -85,7 +85,7 @@
                     <input type="text" id="search_fest" class="text" style="display:block;" name="search_fest"
                            placeholder="원하시는 지역명, 축제명을 입력해주세요">
                     <button type="button" name="btn-room-search" id="btn-room-search" style="display:block;"
-                            th:onclick="'javascript:getFestList();'" >찾아보기
+                            th:onclick="'javascript:getFestivalKeyword();'" >찾아보기
                     </button>
                 </div>
             </div>
@@ -141,8 +141,8 @@
     var item = [[${item}]];
     //id가 map인 태그에 지도 형성
     //클러스터맵 형성
-    clusterMap(item);
-    makeFestList(ingFilter(item));
+    XYintoClusterMap(item);
+    makeTagInHtml(ingFestival(item));
 
 
 
