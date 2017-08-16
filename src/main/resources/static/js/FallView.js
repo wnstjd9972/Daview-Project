@@ -9,11 +9,11 @@ function fallFestival(item) {
         var sday = new Date(item[i].eventStartDate);
         var eday = new Date(item[i].eventEndDate);
 
-        console.log(sday +" " + eday);
+        // console.log(sday +" " + eday);
         sday.setYear(today.getFullYear());
         eday.setYear(today.getFullYear());
-        console.log(sday +" " + eday);
-        console.log(sday.getMonth());
+        // console.log(sday +" " + eday);
+        // console.log(sday.getMonth());
 
           if (eday < sday) {
               eday.setYear((today.getFullYear()) + 1);
@@ -22,7 +22,7 @@ function fallFestival(item) {
           else{
             if((sday.getMonth() === 9) || (eday.getMonth() === 9)) {
                 fallFest.push(item[i]);
-                console.log(fallFest)
+                // console.log(fallFest)
             }
         }
     }
@@ -32,24 +32,45 @@ function fallFestival(item) {
 function fallFestivalView(item) {
     var fall = fallFestival(item);
 
-    for (var i = 0; i < fall.length; i++) {
-        //태그속성주기
-        var div = document.createElement('div');
-        div.className += "img-w";
+    //태그속성주기
+    var div = document.createElement('div');
+    div.className += "tg-container";
 
-        var img = document.createElement('img');
-        img.src += fall[i].firstImage;
+    var ul = document.createElement('ul');
+    ul.className += "tg-gallery";
+
+
+
+
+    var fallGalDiv = document.getElementById("gallery").appendChild(div);
+    var fallGalUl = fallGalDiv.appendChild(ul);
+
+
+    for (var i = 0; i < fall.length; i++) {
+
+
+        var li = document.createElement('li');
+        li.className += "tg-template";
+
+        var divLi = document.createElement('div');
+        divLi.className += "tg-thumbnail";
 
 
         var a = document.createElement('a');
+        a.className += "a-detail";
         a.href += '/daview/detail/' + fall[i].contentId;
 
-        //실질적인 표현?
-        var fallGalDiv = document.getElementById("gallery").appendChild(div);
-        var fallGalA = fallGalDiv.appendChild(a);
-        fallGalA.append(img);
+        var img = document.createElement('img');
+        img.src += fall[i].firstImage;
+        img.className += "img-size";
 
 
+
+        var fallGalLi = fallGalUl.appendChild(li);
+        var fallGalLiA = fallGalLi.appendChild(a);
+        fallGalLiA.append(fall[i].title);
+
+        fallGalLiA.append(img);
 
 
 

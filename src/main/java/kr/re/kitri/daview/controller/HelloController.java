@@ -61,7 +61,7 @@ public class HelloController {
     public  ModelAndView daviewFall() throws Exception {
         List<Item> itemList = mainBoardService.getBoardValue();
         ModelAndView mav = new ModelAndView("/season/fall");
-        mav.addObject("itemList",itemList);
+        mav.addObject("item",itemList);
         return mav;
     }
 
@@ -69,7 +69,7 @@ public class HelloController {
     public ModelAndView daviewDetail(@PathVariable int contentId) {
         List<Item> itemList = detailBoardService.viewDetail(contentId);
         ModelAndView mav = new ModelAndView("/season/detail");
-        mav.addObject("itemList",itemList);
+        mav.addObject("item",itemList);
         return mav;
     }
 
