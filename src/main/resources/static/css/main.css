@@ -3,7 +3,7 @@ header{
 
 }
 
-html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, address, em, img, sub, sup, u, i, dl, dt, dd, ol, ul,
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, address, em, sub, sup, u, i, dl, dt, dd, ol, ul,
 li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th
 {
     margin: 0;
@@ -213,6 +213,20 @@ button {
     width: 100%;
     background: white;
 }
+.container2 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 66px;
+    width: 100%;
+    height: 814px;
+    background: #ffffff;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
 .map-area {
     position: absolute;
     left: 0;
@@ -264,6 +278,12 @@ button {
     text-indent: 30px;
     outline: none;
     background: url(/image/search/ico_search.png) no-repeat 10px center;
+}
+.list-item  img {
+    width: 160px;
+    height: 100%;
+    position: relative;
+
 }
 .map-area .map-tab button {
     display: none;
@@ -321,10 +341,7 @@ button {
     bottom: 0;
     width: 400px;
     height: 100%;
-    overflow-x: hidden;
-    /*overflow-y:scroll;*/
-    overflow: hidden;
-    background: none;
+    background: lightgrey;
 }
 .map-search {
     position: relative;
@@ -372,15 +389,18 @@ button {
 }
 
 .list-item {
+
+    margin: 8px 8px 8px 8px;
+    height: 120px;
+    background: white;
+    border-bottom: 0;
+    box-shadow: 1px 1px 1px 1px #a5a5a5;
     position: relative;
-    padding: 12px 0 0 115px;
-    width: 200px;
-    height: 78px;
     overflow: hidden;
-    border: 0;
-    border-radius: 5px;
-    cursor: pointer;
-    background: none;
+
+}
+.list-item center   {
+    width: 100%;
 }
 
 
@@ -451,3 +471,27 @@ button {
     background-color: #555555;
     color: white;
 }
+
+.size40 {
+    height: 100%;
+    width: 160px;
+    float: left;
+}
+.size60 {
+    height: 100%;
+    width: 207px;
+    float: left;
+}
+.SEday{
+    position:absolute;
+    bottom:3px;
+    right:3px;
+
+
+}
+.title{
+    padding-top: 10px;
+    font-size: medium;
+    text-align: center;
+    color: #ff7800;
+    }

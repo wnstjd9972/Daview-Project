@@ -2,24 +2,26 @@
  * elementId를 받아서 Map을 형성합니다.
  * @param elementId
  */
-
-function setMap(elementId) {
-    var mapDiv = document.getElementById(elementId);
-    var naverMapOptions = {
+//기본맵 설정
+function Map() {
+    var map = new naver.maps.Map('map', {
         center: new naver.maps.LatLng(36, 127),
         zoom: 2,
         mapTypeId: naver.maps.MapTypeId.NORMAL,
         mapTypeControl: true
-    };
+    });
     //옵션 없이 지도 객체를 생성하면 서울시청을 중심으로 하는 11레벨의 지도가 생성됩니다.
-    var map = new naver.maps.Map(mapDiv, naverMapOptions);
     return map;
 }
 
 
-function insertClusterImformation(item) {
-    var cluster = ingFilter(item);
-    //클러스터화 하기 위한 좌표값을 넣을 배열
+function changeFestListInClusterLatLng(item, searchOX) {
+    //현재 진행중인 축제를 cluster에 담는다.
+    var cluster = ingFestival(item);
+   //검색어가 있다면
+    if (searchOX == true){
+        cluster = item;
+    }
     var markers = [];
     var latlng;
     for (var i = 0; i < cluster.length; i++) {
@@ -34,10 +36,24 @@ function insertClusterImformation(item) {
     return markers;
 }
 
-function clusterMap(map, item) {
+
+function newRequestMap(item) {
+    //함수가 실행되면 기존의 클러스터는 삭제되고 가공된 item을 clusterMap에 넣음으로써 item기반의 새로운 클러스터 지도 형성
+    var ri = document.getElementById("map");
+
+    //새로운 검색시 기존 데이터를 삭제
+    while (ri.hasChildNodes()){
+        ri.removeChild(ri.lastChild)
+    }
+
+    XYintoClusterMap(item, true)
+}
 
 
-    var markers = insertClusterImformation(item);
+function XYintoClusterMap(item, searchOX) {
+    //클러스터화 시킬 맵을 찾습니다.
+    var map = Map();
+    var markers = changeFestListInClusterLatLng(item, searchOX);
 
     //클러스터 이미지 파일입니다.
     var htmlMarker1 = {
