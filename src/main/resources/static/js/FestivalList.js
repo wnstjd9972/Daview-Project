@@ -77,7 +77,7 @@ function makeTagInHtml(item) {
         e.preventDefault();
         var XY = $(this).attr('id');
         var input = new naver.maps.LatLng(XY);
-        Map().panto(input);
+        setMap().panto(input);
     });
 
 }

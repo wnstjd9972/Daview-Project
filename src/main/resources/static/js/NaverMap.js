@@ -3,7 +3,7 @@
  * @param elementId
  */
 //기본맵 설정
-function Map() {
+function setMap() {
     var map = new naver.maps.Map('map', {
         center: new naver.maps.LatLng(36, 127),
         zoom: 2,
@@ -13,6 +13,7 @@ function Map() {
     //옵션 없이 지도 객체를 생성하면 서울시청을 중심으로 하는 11레벨의 지도가 생성됩니다.
     return map;
 }
+
 
 
 function changeFestListInClusterLatLng(item, searchOX) {
@@ -52,7 +53,7 @@ function newRequestMap(item) {
 
 function XYintoClusterMap(item, searchOX) {
     //클러스터화 시킬 맵을 찾습니다.
-    var map = Map();
+    var map = setMap();
     var markers = changeFestListInClusterLatLng(item, searchOX);
 
     //클러스터 이미지 파일입니다.
