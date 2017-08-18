@@ -81,16 +81,15 @@
 </div>
 
 <div class="container">
+    <h1>가을 축제 정보</h1>
+    <div id="wrap" class="search-container">
+        <input id="search_fest" name="search_fest" type="text" placeholder="검색어를 입력하세요.">
+        <input id="btn-room-search" name="btn-room-search" value="Rechercher" type="submit">
+    </div>
     <div class="gallery" id="gallery">
-        <h1>가을 축제 정보</h1>
-        <div id="wrap" class="search-container">
-            <!--<form action="" autocomplete="on">-->
-                <input id="search_fest" name="search_fest" type="text" placeholder="What're we looking for ?">
-                <input id="btn-room-search" name="btn-room-search" value="Rechercher" type="submit">
-            <!--</form>-->
-        </div>
     </div>
 </div>
+
 <script th:inline="javascript">
 
     var item = [[${item}]];

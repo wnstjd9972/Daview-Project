@@ -13,8 +13,13 @@ function getFestivalKeyword2() {
             workedList.push(item[i])
         }
     }
+    var pastList = document.getElementById("gallery");
+    //새로운 검색시 기존 데이터를 삭제
+    while (pastList.hasChildNodes()) {
+        pastList.removeChild(pastList.lastChild)
+    }
 
-    return console.log(workedList)
+    return fallFestivalView(workedList)
 }
 
 $(document).ready(function () {
@@ -25,6 +30,8 @@ $(document).ready(function () {
         }
     });
 });
+
+
 
 
 

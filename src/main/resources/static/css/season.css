@@ -128,11 +128,12 @@ height: 200px;
 
 }
 
-.gallery h1 {
-    font-size: 48px;
+.container h1 {
+    font-size: 30px;
     font-weight: 100;
     text-align: center;
     line-height: 63px;
+    color: #ff7800;
 }
 
 .detailimg {

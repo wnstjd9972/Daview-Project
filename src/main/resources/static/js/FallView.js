@@ -15,6 +15,9 @@ function fallFestival(item) {
 function fallFestivalView(item) {
     var fall = fallFestival(item);
 
+
+
+
     //태그속성주기
     var div = document.createElement('div');
     div.className += "tg-container";
