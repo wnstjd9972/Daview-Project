@@ -13,9 +13,10 @@
     <link rel="shortcut icon" th:href="@{/image/logo/favicon.ico}"/>
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
+    <script type="text/javascript" th:src="@{/js/DetailView.js}"></script>
 </head>
 <body>
-<div class="header">
+<div class="header" >
     <h1><a href="/daview">
         <img class="Logo" th:src="@{/image/logo/project_logo.png}" alt="다뷰"/>
     </a></h1>
@@ -72,37 +73,47 @@
 </div>
 
 <div class="container">
-    <div class="map-container">
-        <table id="userDetailTable">
-            <thead>
-            <tr>
-                <th>주소</th>
-                <th>시작날짜</th>
-                <th>끝나는날짜</th>
-                <th>이미지</th>
-                <th>X</th>
-                <th>Y</th>
-                <th>조회수</th>
-                <th>전화번호</th>
-                <th>제목</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item : ${itemList}">
-              
-                <td th:text="${item.addr1}">주소</td>
-                <td th:text="${item.eventStartDate}">시작날짜</td>
-                <td th:text="${item.eventEndDate}">끝나는날짜</td>
-                <td><img th:src="${item.firstImage}" width="500px" height="300px"></td>
-                <td th:text="${item.mapX}">X</td>
-                <td th:text="${item.mapY}">Y</td>
-                <td th:text="${item.readCount}">조회수</td>
-                <td th:text="${item.tel}">전화번호</td>
-                <td th:text="${item.title}">제목</td>
-            </tr>
-            </tbody>
-        </table>
+    <!--<div class="map-container">-->
+        <!--<table id="userDetailTable">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>주소</th>-->
+                <!--<th>시작날짜</th>-->
+                <!--<th>끝나는날짜</th>-->
+                <!--<th>이미지</th>-->
+                <!--<th>X</th>-->
+                <!--<th>Y</th>-->
+                <!--<th>조회수</th>-->
+                <!--<th>전화번호</th>-->
+                <!--<th>제목</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr th:each="item : ${itemList}">-->
+              <!---->
+                <!--<td th:text="${item.addr1}">주소</td>-->
+                <!--<td th:text="${item.eventStartDate}">시작날짜</td>-->
+                <!--<td th:text="${item.eventEndDate}">끝나는날짜</td>-->
+                <!--<td><img th:src="${item.firstImage}" width="500px" height="300px"></td>-->
+                <!--<td th:text="${item.mapX}">X</td>-->
+                <!--<td th:text="${item.mapY}">Y</td>-->
+                <!--<td th:text="${item.readCount}">조회수</td>-->
+                <!--<td th:text="${item.tel}">전화번호</td>-->
+                <!--<td th:text="${item.title}">제목</td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</div>-->
+    <div class="container">
+        <div id="detail">
+        </div>
     </div>
+    <script th:inline="javascript">
+
+        var item = [[${item}]];
+        detailFestival(item);
+
+    </script>
 </div>
 </body>
 </html>

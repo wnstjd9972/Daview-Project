@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.ultraq.net.nz/web/thymeleaf/layout">
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +12,8 @@
   <link rel="shortcut icon" th:href="@{/image/logo/favicon.ico}"/>
   <script type="text/javascript"
           src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
+  <script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+  <script type="text/javascript" th:src="@{/js/FallView.js}"></script>
 </head>
 <body>
 <div class="header">
@@ -70,25 +73,15 @@
 </div>
 
 <div class="container">
-  <div class="map-container">
-    <table id="gallery" class="_12jHn forum-card-background-color forum-card-border-color category-list-item hv6Wy _2Xy4L" style="border-width: 0px;">
-      <thead style="color: inherit;">
-      <tr>
-        <th>이미지</th>
-        <th>Title</th>
-      </tr>
-      </thead>
-      <tbody class="_38E54" style="position: absolute; left: 0px; top: 0px;">
-      <tr th:each="item : ${itemList}">
-        <td>
-          <img th:src="${item.firstImage}" width="500px" height="300px">
-        </td>
-        <td>
-          <a th:text="${item.title}" th:href="@{/daview/detail/} + ${item.contentId}"/>  </td>
-      </tr>
-      </tbody>
-    </table>
+  <div class="gallery" id="gallery">
+    <h1>가을 축제 정보</h1>
   </div>
 </div>
+<script th:inline="javascript">
+
+    var item = [[${item}]];
+    fallFestivalView(item);
+
+</script>
 </body>
 </html>
