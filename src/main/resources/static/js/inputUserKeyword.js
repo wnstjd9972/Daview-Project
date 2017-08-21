@@ -9,9 +9,26 @@ function getFestivalKeyword() {
     }
     if (workedList.length == 0) return alert("검색하신 축제가 존재하지 않습니다.");
 
-    $("#datepicker1").datepicker('setDate', '');
-    $("#datepicker2").datepicker('setDate', '');
+    $(function () {
 
+
+        $("#slider-range").slider({
+            range: true,
+            min: new Date('2015.01.01').getTime() / 1000,
+            max: new Date('2018.12.31').getTime() / 1000,
+            step: 86400,
+            values: [new Date('2015.01.01').getTime() / 10000, new Date('2018.12.31').getTime() / 100],
+            slide: function (event, ui) {
+                $("#amount").val(addMonth((new Date(ui.values[0] * 1000))) +
+                    " - " + addMonth((new Date(ui.values[1] * 1000))));
+                USD = new Date(ui.values[0] * 1000);
+                UED = new Date(ui.values[1] * 1000);
+                getUserDate()
+            }
+        });
+        $("#amount").val(addMonth((new Date($("#slider-range").slider("values", 0) * 1000))) +
+            " - " + addMonth((new Date($("#slider-range").slider("values", 1) * 1000))));
+    });
     return makeClusterMap(workedList)
 }
 
