@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>전국 구석구석</title>
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/datepicker.css}" rel="stylesheet"/>
     <link rel="shortcut icon" th:href="@{/image/logo/favicon.ico}"/>
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
@@ -15,7 +16,6 @@
     <script type="text/javascript" th:src="@{js/NaverMap.js}"></script>
     <script type="text/javascript" th:src="@{js/inputUserKeyword.js}"></script>
     <script type="text/javascript" th:src="@{js/DatePicker.js}"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
@@ -42,17 +42,18 @@
                     <a href="/daview/winter">겨울</a>
                 </div>
             </li>
-
             <li class="has_d2">
-                <a>테마별 축제
-                    <small>불꽃놀이/해변축제/꽃축제</small>
+                <a href="/daview/area1">지역별 축제
+                    <small>축제</small>
                 </a>
 
                 <div class="depth2_bx">
-                    <a href="/">모든 테마</a>
-                    <a href="/">불꽃놀이</a>
-                    <a href="/">해변축제</a>
-                    <a href="/">꽃축제</a>
+                    <a href="/daview/area1">서울/경기 지방</a>
+                    <a href="/daview/area2">관동 지방</a>
+                    <a href="/daview/area3">호서 지방</a>
+                    <a href="/daview/area4">호남 지방</a>
+                    <a href="/daview/area5">영남 지방</a>
+                    <a href="/daview/area6">제주 지방</a>
                 </div>
             </li>
 
@@ -62,9 +63,6 @@
                 </a>
             </li>
 
-            <li class="has_d2">
-                <a href="/">고객센터</a>
-            </li>
 
         </ul>
     </div>
@@ -105,12 +103,47 @@
         <div class="map-content" id="map-content">
             <!-- search -->
             <div class="map-search" id="map-search">
-                <p>조회기간:
-                </p>
-                <div class="selectDateIm">
-                    <input type="text" id="datepicker1"> ~
-                    <input type="text" id="datepicker2">
+                <!--<p>조회기간:-->
+                <!--</p>-->
+                <!--<div class="selectDateIm">-->
+                <!--<input id="datepicker1"> ~-->
+                <!--<input id="datepicker2">-->
+                <!--</div>-->
+                <div class="dateSearchRange">
+                    <p>
+                        <label for="amount">조회기간</label>
+
+                    </p>
+                    <input type="text" id="amount" style="border: 0; color: #ff7800; font-weight: lighter; font-size: 20px;
+                            margin-top: 2%; margin-bottom: 3%"
+                           class="amount"/>
+                    <div id="slider-range"></div>
                 </div>
+                <div class="item-deposit">
+                    <h4>지역</h4>
+                    <select id="city" name="city">
+                        <option value="" selected="selected">전국</option>
+                        <option value="1">서울</option>
+                        <option value="2">인천</option>
+                        <option value="3">대전</option>
+                        <option value="4">대구</option>
+                        <option value="5">광주</option>
+                        <option value="6">부산</option>
+                        <option value="7">울산</option>
+                        <option value="8">세종특별자치시</option>
+                        <option value="31">경기도</option>
+                        <option value="32">강원도</option>
+                        <option value="33">충청북도</option>
+                        <option value="34">충청남도</option>
+                        <option value="37">전라북도</option>
+                        <option value="38">전라남도</option>
+                        <option value="35">경상북도</option>
+                        <option value="36">경상남도</option>
+                        <option value="39">제주도</option>
+
+                    </select>
+                </div>
+
             </div>
             <div class="container2" id="itemList">
             </div>
@@ -120,8 +153,9 @@
 <script th:inline="javascript">
     //item 객체를 받아와서 thymeleaf 형태로 변환
     var item = [[${item}]];
-    var FSD;
-    var FED;
+    var USD;
+    var UED;
+
     makeClusterMap(ingFestival(item));
 
 </script>

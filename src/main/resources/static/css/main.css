@@ -364,7 +364,7 @@ button {
     *width: 200px;
 }
 .map-search .item-deposit select {
-    width: 45%;
+    width: 90%;
     font-size: 12px;
     height: 23px;
 }
@@ -502,13 +502,22 @@ button {
     height: 55%;
 }
 .selectDateIm{
-    width: auto;
     height: 18%;
     padding-left: 5%;
     padding-top: 3%;
 }
 p{
-    padding-left: 3%;
-    padding-top: 3%;
-    font-size: 15px
+    padding-top: 4%;
+    font-size: 17px
+}
+
+.dateSearchRange{
+    float: left;
+    width: 60%;
+    padding-left: 5%;
+    margin: 0;
+}
+
+.amount{
+  background: #f6f6f6;
 }

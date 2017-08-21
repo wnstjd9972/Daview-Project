@@ -12,14 +12,7 @@ function ingFestival(item){
         var sday = new Date(item[i].eventStartDate);
         var eday = new Date(item[i].eventEndDate);
         //오늘 날짜에서 축제 날짜를 비교하여 현재 진행중인 축제일 경우 마커를 표시할 XY좌표를 넘깁니다.
-        if (today < sday) {
-        }
-        else if (today >= sday) {
-            if (today <= eday) {
-                ingFestival.push(item[i])
-            }
-            else {
-            }
+        if (today < sday || today > eday) {
         }
         else {
             ingFestival.push(item[i])
