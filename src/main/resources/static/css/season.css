@@ -1,7 +1,9 @@
+@charset "utf-8";
+
 .container{
 position: absolute;
 top: 100px;
-
+width: 100%;
 }
 
 .tg-container {
@@ -20,9 +22,53 @@ min-height: calc(100vh - 78px);
 border-left: 1px solid rgba(32, 48, 60, 0.1);
 }
 
+.detail-container {
+    width: 70%;
+    height: 100%;
+}
+
+.map {
+    width: 100%;
+    height: 400px;
+    float: inherit;
+}
+
+.search-container {
+    width: 100%;
+}
+
+.detail-img {
+    width: 60%;
+    float: left;
+}
+
+.detail-inform {
+    top:400px;
+    width: 40%;
+    float: right;
+}
+
 ul {
-list-style: none;
+    display: block;
+    list-style: none;
     cursor: pointer;
+}
+
+.detail-informList {
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+dl {
+    list-style: none;
+}
+
+dd {
+    display: list-item;
+    text-align: -webkit-match-parent;
+    line-height: 2;
+    margin-left: 60px;
+    font-size: 15px;
 }
 
 .-sidebar-open > .tg-container > .tg-gallery {
@@ -50,9 +96,10 @@ text-align: center;
 }
 
 .tg-gallery li {
+    margin-top: 20px;
 display: list-item;
 text-align: -webkit-match-parent;
-width: 352px;
+width: 300px;
 }
 
 .tg-thumbnail {
@@ -76,15 +123,40 @@ box-shadow: 0px 1px 2px 0px rgba(32, 48, 60, 0.14), 0px 3px 3px 0px rgba(32, 48,
 }
 
 .img-size {
-width: 352px;
-height: 222px;
+width: 300px;
+height: 200px;
 
 }
 
-.gallery h1 {
-    font-size: 48px;
+.container h1 {
+    font-size: 30px;
     font-weight: 100;
     text-align: center;
     line-height: 63px;
+    color: #ff7800;
+}
+
+.detailimg {
+    min-width: 500px;
+    max-width: 520px;
+    padding: 10px;
+}
+
+em {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+}
+
+.a-detail em {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: 39px;
+    height: 39px;
+    background: url(//s.zigbang.com/v1/web/search/ico_rec.png) no-repeat 0 0;
 }
 

@@ -1,29 +1,12 @@
 function fallFestival(item) {
-
     var fallFest = [];
-
-    var date = new Date();
-    var today = date;
-
     for (var i = 0; i < item.length; i++) {
         var sday = new Date(item[i].eventStartDate);
         var eday = new Date(item[i].eventEndDate);
 
-        // console.log(sday +" " + eday);
-        sday.setYear(today.getFullYear());
-        eday.setYear(today.getFullYear());
-        // console.log(sday +" " + eday);
-        // console.log(sday.getMonth());
-
-          if (eday < sday) {
-              eday.setYear((today.getFullYear()) + 1);
-              fallFest.push(item[i]);
-          }
-          else{
-            if((sday.getMonth() === 9) || (eday.getMonth() === 9)) {
-                fallFest.push(item[i]);
-                // console.log(fallFest)
-            }
+        if ((sday.getMonth() === 9) || (eday.getMonth() === 9)) {
+            fallFest.push(item[i]);
+            // console.log(fallFest)
         }
     }
     return fallFest;
@@ -32,14 +15,15 @@ function fallFestival(item) {
 function fallFestivalView(item) {
     var fall = fallFestival(item);
 
+
+
+
     //태그속성주기
     var div = document.createElement('div');
     div.className += "tg-container";
 
     var ul = document.createElement('ul');
     ul.className += "tg-gallery";
-
-
 
 
     var fallGalDiv = document.getElementById("gallery").appendChild(div);
@@ -66,15 +50,23 @@ function fallFestivalView(item) {
 
 
 
-        var fallGalLi = fallGalUl.appendChild(li);
-        var fallGalLiA = fallGalLi.appendChild(a);
-        fallGalLiA.append(fall[i].title);
+        var fallGalLiA = fallGalUl.appendChild(li).appendChild(a);
 
+        fallGalLiA.append(fall[i].title);
         fallGalLiA.append(img);
 
+        // console.log(fall[i].readCount);
 
-
-
+        // //추천하기
+        // if(fall[i].readCount > 100000) {
+        //     recommendList();
+        // }
 
     }
+
+// function recommendList() {
+//     var div = document.createElement('div');
+//     //div.className += "";
+// }
+
 }

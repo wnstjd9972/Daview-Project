@@ -21,7 +21,7 @@ public class MainBoardDao {
     public List<Item> getBoard() {
 
         Connection con  = insertService.getConnection();
-        String query = "select firstImage, title, contentId, eventStartDate, eventEndDate from festival order by readCount;";
+        String query = "select firstImage, title, contentId, eventStartDate, eventEndDate, readCount, addr1 from festival order by eventStartDate DESC;";
         List<Item> itemArrayList = new ArrayList<>();
         Item item;
         try {
@@ -34,6 +34,8 @@ public class MainBoardDao {
                 item.setContentId(rs.getInt(3));
                 item.setEventStartDate(rs.getDate(4));
                 item.setEventEndDate(rs.getDate(5));
+                item.setReadCount(rs.getInt(6));
+                item.setAddr1(rs.getString(7));
 
                 itemArrayList.add(item);
 

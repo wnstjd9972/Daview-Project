@@ -7,11 +7,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>전국 구석구석</title>
+  <link th:href="@{/css/main.css}" rel="stylesheet"/>
+  <link th:href="@{/css/season.css}" rel="stylesheet"/>
+  <link th:href="@{/css/search.css}" rel="stylesheet"/>
+  <link th:href="@{/css/paging.css}" rel="stylesheet"/>
 
-  <link th:href="@{/css/main.css}" rel="stylesheet" />
   <link rel="shortcut icon" th:href="@{/image/logo/favicon.ico}"/>
   <script type="text/javascript"
           src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
+  <script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+
+  <script type="text/javascript" th:src="@{/js/SeasonView.js}"></script>
+  <script type="text/javascript" th:src="@{/js/SeasonPaging.js}"></script>
+  <script type="text/javascript" th:src="@{/js/FestivalListFilter.js}"></script>
 </head>
 <body>
 <div class="header">
@@ -69,3 +77,27 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+  <a href="/daview/summer">
+  <p class="over" style="text-align: center">
+    <img src="/image/season/summer.png" style="max-width: 190px; border-radius: 50px">
+  </p></a>
+  <div id="wrap" class="search-container">
+    <input id="search_fest" name="search_fest" type="text" placeholder="검색어를 입력하세요.">
+    <input id="btn-room-search" name="btn-room-search" value="Rechercher" type="submit">
+  </div>
+  <div class="gallery" id="gallery">
+  </div>
+</div>
+
+<script th:inline="javascript">
+
+    var item = [[${item}]];
+    summerFestival(item);
+//    pagingFall(item);
+
+
+</script>
+</body>
+</html>
