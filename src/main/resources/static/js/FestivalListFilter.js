@@ -19,7 +19,7 @@ function getFestivalKeyword2() {
         pastList.removeChild(pastList.lastChild)
     }
 
-    return fallFestivalView(workedList)
+    return FestivalView(workedList)
 }
 
 $(document).ready(function () {

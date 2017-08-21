@@ -14,15 +14,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Repository
-public class RankDao {
+public class Area6Dao {
 
     @Autowired
     InsertService insertService;
 
-    public List<Item> getRank() {
+    public List<Item> getArea6() {
         Connection con  = insertService.getConnection();
         String query = "select firstImage, title, contentId, eventStartDate, eventEndDate, readCount, addr1 from festival " +
-                "ORDER BY readcount DESC limit 100;";
+                "WHERE areaCode =39 ORDER BY readcount DESC;";
         List<Item> itemArrayList = new ArrayList<>();
         Item item;
         try {

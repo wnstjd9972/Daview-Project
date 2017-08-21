@@ -26,7 +26,27 @@ function pagingFall(item) {
     var prev = startPage == 1 ? false : true;
     var next = endPage * presentPage >= totalCount ? false : true;
 
+    pagingList(totalCount, perPageNum, endPage, startPage, displayPageNum);
+
+}
+
+function pagingList(totalCount, perPageNum, endPage, startPage, displayPageNum) {
+
+    document.getElementsByName("page").append(perPageNum);
+    document.getElementsByName("perPageNum").append(perPageNum);
+
+
 
 
 }
 
+$(".pagination li a").on("click", function (event) {
+    event.preventDefault();
+
+    var targetPage = $(this).attr("href");
+
+    var jobForm = $("#jobForm");
+    jobForm.find("[name='page']").val(targetPage);
+    jobForm.attr("action", "/daview/fall").attr("method", "get");
+    jobForm.submit();
+});

@@ -1,32 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>전국 구석구석</title>
-    <link th:href="@{/css/main.css}" rel="stylesheet"/>
-    <link rel="shortcut icon" th:href="@{/image/favicon.ico}"/>
-    <script type="text/javascript"
-            src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf&submodules=panorama,geocoder,visualization"></script>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>전국 구석구석</title>
+        <link th:href="@{/css/main.css}" rel="stylesheet"/>
+        <link th:href="@{/css/season.css}" rel="stylesheet"/>
+        <link th:href="@{/css/search.css}" rel="stylesheet"/>
+        <link th:href="@{/css/paging.css}" rel="stylesheet"/>
 
+        <link rel="shortcut icon" th:href="@{/image/logo/favicon.ico}"/>
+        <script type="text/javascript"
+                src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
+        <script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+
+        <script type="text/javascript" th:src="@{/js/SeasonView.js}"></script>
+        <script type="text/javascript" th:src="@{/js/SeasonPaging.js}"></script>
+        <script type="text/javascript" th:src="@{/js/FestivalListFilter.js}"></script>
+    </head>
+<body>
 <div class="header">
     <h1><a href="/daview">
-        <img class="Logo" th:src="@{/image/project_logo.png}" alt="다뷰"/>
+        <img class="Logo" th:src="@{/image/logo/project_logo.png}" alt="다뷰"/>
     </a></h1>
 
     <div class="gnb">
 
         <ul id="gnb-container">
             <li class="has_d2">
-                <a href="/">계절별 축제
+                <a href="/daview/spring">계절별 축제
                     <small>봄/여름/가을/겨울</small>
                 </a>
 
                 <div class="depth2_bx">
-                    <a href="/daview/all">모든 계절</a>
                     <a href="/daview/spring">봄</a>
                     <a href="/daview/summer">여름</a>
                     <a href="/daview/fall">가을</a>
@@ -35,15 +44,17 @@
             </li>
 
             <li class="has_d2">
-                <a href="/search/map">테마별 축제
-                    <small>불꽃놀이/해변축제/꽃축제</small>
+                <a href="/daview/area1">지역별 축제
+                    <small>축제</small>
                 </a>
 
                 <div class="depth2_bx">
-                    <a href="/">모든 테마</a>
-                    <a href="/">불꽃놀이</a>
-                    <a href="/">해변축제</a>
-                    <a href="/">꽃축제</a>
+                    <a href="/daview/area1">서울/경기 지방</a>
+                    <a href="/daview/area2">관동 지방</a>
+                    <a href="/daview/area3">호서 지방</a>
+                    <a href="/daview/area4">호남 지방</a>
+                    <a href="/daview/area5">영남 지방</a>
+                    <a href="/daview/area6">제주 지방</a>
                 </div>
             </li>
 
@@ -69,97 +80,23 @@
 </div>
 
 <div class="container">
-
-    <!--양옆-->
-
-    <div class="map-container">
-        <div class="map-area">
-            <div id="map" style="width:100%;height:100%;">
-
-
-                <table id="rankTable">
-                    <thead>
-                    <tr>
-                        <th>title</th>
-                        <th>addr1</th>
-                        <th>readCount</th>
-                        <th>EventStartdate</th>
-                        <th>EventEnddate</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr th:each="rank : ${rankList}">
-                        <td th:text ="${rank.title}">title</td>
-                        <td th:text="${rank.addr1}">addr1</td>
-                        <td th:text="${rank.readCount}">readCount</td>
-                        <td th:text="${rank.eventStartDate}">StartDate</td>
-                        <td th:text="${rank.eventEndDate}">EndDate</td>
-                    </tr>
-                    </tbody>
-
-                </table>
-
-            </div>
-        </div>
-
-
-
-
-        <div class="map-content" id="map-content">
-            <!-- search -->
-            <div class="map-search">
-
-                <div class="item-deposit">
-                    <h4>계절</h4>
-                    <select id="season" name="seaon">
-                        <option value="전체">전체</option>
-                        <option value="봄">봄</option>
-                        <option value="여름">여름</option>
-                        <option value="가을">가을</option>
-                        <option value="겨울">겨울</option>
-                    </select>
-                </div>
-
-                <div class="item-deposit">
-                    <h4>테마</h4>
-                    <select id="thema" name="thema">
-                        <option value="전체">전체</option>
-                        <option value="불꽃놀이">불꽃놀이</option>
-                        <option value="해변축제">해변축제</option>
-                        <option value="꽃축제">꽃축제</option>
-                    </select>
-                </div>
-
-                <div class="item-deposit">
-                    <h4>지역</h4>
-                    <select id="city" name="city">
-                        <option value="전체">전체</option>
-                        <option value="서울">서울</option>
-                        <option value="부산">부산</option>
-                    </select>
-                </div>
-
-
-                <div class="item-type">
-                    <h4>정렬</h4>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="01" check/> 랭킹순</label>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="02" check/> 이름순</label>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="03" check/> 이름순(역행)</label>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="04" check/> 별점순</label>
-                    <label>
-                        <input type="checkbox" name="room" class="item_room" value="05" check/> HOT</label>
-                </div>
-            </div>
-        </div>
-
+    <a href="/daview/rank">
+    <p class="over" style="text-align: center">
+    <img src="/image/top100.png" style="max-width: 190px; border-radius: 50px">
+    </p></a>
+    <div id="wrap" class="search-container">
+        <input id="search_fest" name="search_fest" type="text" placeholder="검색어를 입력하세요.">
+        <input id="btn-room-search" name="btn-room-search" value="Rechercher" type="submit">
+    </div>
+    <div class="gallery" id="gallery">
     </div>
 </div>
 
+<script th:inline="javascript">
 
+    var item = [[${item}]];
+    FestivalView(item);
+
+</script>
 </body>
 </html>

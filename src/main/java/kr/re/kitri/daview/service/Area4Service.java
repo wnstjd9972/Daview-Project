@@ -1,6 +1,6 @@
 package kr.re.kitri.daview.service;
 
-import kr.re.kitri.daview.dao.RankDao;
+import kr.re.kitri.daview.dao.Area4Dao;
 import kr.re.kitri.daview.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,13 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RankService {
-
+public class Area4Service {
     @Autowired
-    private RankDao rankDao;
-    public List<Item> getRankList() {
-        return rankDao.getRank();
+    private Area4Dao area4Dao;
+    public List<Item> getBoardArea4() {
+
+        return area4Dao.getArea4();
     }
 }
-
-
