@@ -3,7 +3,7 @@
  * @param elementId
  */
 //첫 화면에 보여줄 현재 진행중인 축제를 걸러내는 JS입니다.
-function ingFestival(item){
+function ingFestival(item) {
     //진행중인 축제를 담을 배열 입니다.
     var ingFestival = [];
     //현재 진행중인 축제를 찾아내기 위한 함수입니다.
@@ -89,6 +89,7 @@ function reinventionDate() {
     }
 }
 
+
 //기본맵 설정
 function setMap() {
     var map = new naver.maps.Map('map', {
@@ -102,6 +103,7 @@ function setMap() {
 }
 
 
+//cluster를 찍을 LatLng를 파싱합니다.
 function getMarkLatLng(item) {
     var markers = [];
     var latlng;
@@ -121,6 +123,7 @@ function getMarkLatLng(item) {
     return markers;
 }
 
+//Html에 추출한 item을 보여줍니다.
 function showFestListInHtml(item) {
     for (var i = 0; i < item.length; i++) {
         //클릭시 detail로 이동
@@ -160,10 +163,140 @@ function showFestListInHtml(item) {
     }
 }
 
+//검색버튼을 누르거나 엔터키를 입력하면 실행합니다.
+//축제리스트를 걸러내는 JS
+function getFestivalKeyword() {
+    //검색창에서 검색어를 받아옵니다.
+    var content = document.getElementsByName("search_fest").item("0").value;
+    var workedList = [];
+
+    for (var i = 0; i < item.length; i++) {
+        if (item[i].addr1.match(content) || item[i].title.match(content)) workedList.push(item[i])
+    }
+    if (workedList.length == 0) return alert("검색하신 축제가 존재하지 않습니다.");
+
+    $(function () {
 
 
+        $("#slider-range").slider({
+            range: true,
+            min: new Date('2015.01.01').getTime() / 1000,
+            max: new Date('2018.12.31').getTime() / 1000,
+            step: 86400,
+            values: [new Date('2015.01.01').getTime() / 10000, new Date('2018.12.31').getTime() / 100],
+            slide: function (event, ui) {
+                $("#amount").val(addMonth((new Date(ui.values[0] * 1000))) +
+                    " - " + addMonth((new Date(ui.values[1] * 1000))));
+                USD = new Date(ui.values[0] * 1000);
+                UED = new Date(ui.values[1] * 1000);
+                getUserDate()
+            }
+        });
+        $("#amount").val(addMonth((new Date($("#slider-range").slider("values", 0) * 1000))) +
+            " - " + addMonth((new Date($("#slider-range").slider("values", 1) * 1000))));
+    });
+
+    $('select').find('option:first').attr('selected', 'selected');
+    return makeClusterMap(workedList)
+}
+
+//검색창에 엔터가 눌러지면 getFestivalKeyword 함수가 실행됩니다.
+$(document).ready(function () {
+    $("input[name=search_fest]").keydown(function (key) {
+
+        if (key.keyCode == 13) {//키가 13이면 실행 (엔터는 13)
+            getFestivalKeyword();
+        }
+
+    });
+});
+
+//슬라이더 생성
+$(function () {
+    $("#slider-range").slider({
+        range: true,
+        min: new Date('2015.01.01').getTime() / 1000,
+        max: new Date('2018.12.31').getTime() / 1000,
+        step: 86400,
+        values: [new Date().getTime() / 1000, new Date().getTime() / 1000],
+        slide: function (event, ui) {
+            $("#amount").val(addMonth((new Date(ui.values[0] * 1000))) +
+                " - " + addMonth((new Date(ui.values[1] * 1000))));
+            USD = new Date(ui.values[0] * 1000);
+            UED = new Date(ui.values[1] * 1000);
+            getUserDate()
+        }
+    });
+    $("#amount").val(addMonth((new Date($("#slider-range").slider("values", 0) * 1000))) +
+        " - " + addMonth((new Date($("#slider-range").slider("values", 1) * 1000))));
+
+});
+
+function addMonth(date) {
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var fullDate = year + "." + month + "." + day;
+    return fullDate;
+}
 
 
+//유저 검색어에 맞게 리스트를 수정합니다.
+function getUserDate() {
+    var content = document.getElementsByName("search_fest").item("0").value;
+    var workedList = [];
+    //축제 시작과 끝의 날짜를 유저에게 받는걸 확인 1.if
+    //컨텐츠 내용이 있는지 확인 2.if
+    //있다면 for문을 돌면서 검색어를 가지고 있는 list 들만 추출 3,4 for,if
 
+    if (content != '' && city != null) {
+        for (var i = 0; i < item.length; i++) {
+            if (item[i].areaCode == city && item[i].title.match(content)) {
+                workedList.push(item[i])
+            }
+        }
+        return userCheckDate(workedList)
+    }
+    else if (content != '') {
+        for (var i = 0; i < item.length; i++) {
+            if (item[i].title.match(content)) {
+                workedList.push(item[i])
+            }
+        }
+        return userCheckDate(workedList)
+    }
+    else if (city != null) {
+        for (var i = 0; i < item.length; i++) {
+            if (item[i].areaCode == city) {
+                workedList.push(item[i])
+            }
+        }
+        return userCheckDate(workedList)
+    }
 
+    else return userCheckDate(item)
+}
 
+//검색어가 있다면 리스트를 수정 후
+//가져온 데이트를 날짜에 맞게 파싱
+function userCheckDate(item) {
+    var userCheckList = [];
+
+    for (var i = 0; i < item.length; i++) {
+        var festSD = new Date(item[i].eventStartDate);
+        var festED = new Date(item[i].eventEndDate);
+        //유저끝날이 축제시작일보다 크거나 유저시작일이 축제끝날보다 크면 데이터를 안넣는다.
+        if (USD > festED || UED < festSD) {
+        }
+        else {
+            userCheckList.push(item[i])
+        }
+    }
+    return makeClusterMap(userCheckList);
+}
+
+//select box 지역 선택
+function selectCity(selectObj) {
+    city = selectObj.value;
+    return getUserDate();
+}
