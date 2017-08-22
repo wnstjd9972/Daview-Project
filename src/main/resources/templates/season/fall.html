@@ -19,7 +19,6 @@
     <script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
 
     <script type="text/javascript" th:src="@{/js/SeasonView.js}"></script>
-    <script type="text/javascript" th:src="@{/js/SeasonPaging.js}"></script>
     <script type="text/javascript" th:src="@{/js/FestivalListFilter.js}"></script>
 
 
@@ -92,54 +91,16 @@
         <input id="btn-room-search" name="btn-room-search" value="Rechercher" type="submit">
     </div>
     <div class="gallery" id="gallery">
-
+        <a id="MOVE_TOP_BTN" href="#">
+            <img src="/image/search/img_top.png" style="width: 80px; height: 110px;">
+        </a>
     </div>
-    <div class="paging">
-        <form id="pagingJob">
-            <input type="hidden" name="page">
-            <input type="hidden" name="perPageNum">
-        </form>
-        <ul class="pagination">
-            <li>
-                <a href="1">1</a>
-            </li>
-            <li>
-                <a href="2">2</a>
-            </li>
-            <li>
-                <a href="3">3</a>
-            </li>
-            <li>
-                <a href="4">4</a>
-            </li>
-            <li>
-                <a href="5">5</a>
-            </li>
-            <li>
-                <a href="6">6</a>
-            </li>
-            <li>
-                <a href="7">7</a>
-            </li>
-            <li>
-                <a href="8">8</a>
-            </li>
-            <li>
-                <a href="9">9</a>
-            </li>
-            <li>
-                <a href="10">10</a>
-            </li>
-        </ul>
-    </div>
-
 </div>
 
 <script th:inline="javascript">
 
     var item = [[${item}]];
     fallFestival(item);
-    pagingFall(item);
 
 
 </script>

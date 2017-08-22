@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+.container{
+    position: absolute;
+    top: 80px;
+    width: 100%;
+
+
+}
+
+.detail-container {
+    width: 65%;
+    height: 100%;
+
+    margin: 30px;
+    padding: 26px;
+    border: 1px solid #9d9d9d;
+}
+
+.map {
+    width: auto;
+    height: 400px;
+    float: inherit;
+
+}
+
+.detail-img {
+    width: 60%;
+    float: left;
+
+}
+
+.detail-inform {
+    top:500px;
+    width: 40%;
+    float: right;
+
+}
+
+.detailimg {
+    width: 550px;
+    padding: 10px;
+    border-radius: 50%;
+
+}
+
+.listTitle {
+    margin-top: 70px;
+    height: 70px;
+    font-size: 50px;
+    text-align: center;
+}
+
+.detail-informList {
+    margin-top: 30px;
+    font-weight: bold;
+}

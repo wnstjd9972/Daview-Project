@@ -10,7 +10,7 @@
 
 
     <link th:href="@{/css/main.css}" rel="stylesheet" />
-    <link th:href="@{/css/season.css}" rel="stylesheet" />
+    <link th:href="@{/css/detail.css}" rel="stylesheet" />
 
     <link rel="shortcut icon" th:href="@{/image/logo/favicon.ico}"/>
     <script type="text/javascript"
@@ -75,25 +75,33 @@
     </div>
 </div>
 <div class="container">
-    <div id="detail-container" class="detail-container">
-        <div id="map" class="map">
-        </div>
-        <div class="detail-inform">
-            <dl class="detail-informList" th:each="item : ${item}">
-                <dt> </dt><dd class="detail-informLi" style="font-size: 20px; margin-bottom: 10px; color: #ff7800;  " th:text = "${item.title}"></dd>
-                <dt>시작날짜 :</dt><dd class="detail-informLi" th:text = "${item.eventStartDate}"></dd>
-                <dt>종료날짜 :</dt><dd class="detail-informLi" th:text = "${item.eventEndDate}"></dd>
-                <dt>주소 :</dt><dd class="detail-informLi" th:text = "${item.addr1}"></dd>
-                <dt>전화번호 :</dt><dd class="detail-informLi" th:text = "${item.tel}"></dd>
-            </dl>
+    <!--<div id="detail-container" class="detail-container">-->
+        <!--<div id = "listTitle" class="listTitle"></div>-->
+        <!--<div id="map" class="map">-->
+
+        <!--</div>-->
+        <!--<div class="detail-inform">-->
+            <!--<dl class="detail-informList" th:each="item : ${item}">-->
+                <!--<dt>시작날짜 :</dt><dd class="detail-informLi" th:text = "${item.eventStartDate}"></dd>-->
+                <!--<dt>종료날짜 :</dt><dd class="detail-informLi" th:text = "${item.eventEndDate}"></dd>-->
+                <!--<dt>주소 :</dt><dd class="detail-informLi" th:text = "${item.addr1}"></dd>-->
+                <!--<dt>전화번호 :</dt><dd class="detail-informLi" th:text = "${item.tel}"></dd>-->
+            <!--</dl>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="detail-container">
+        <div id = "listTitle" class="listTitle">
         </div>
     </div>
 </div>
 
 <script th:inline="javascript">
     var item = [[${item}]];
-    setMap2(item);
-    detailFestival(item)
+//    makeTitle(item);
+//    setMap2(item);
+//    detailFestival(item);
+
+    makeTitle(item);
 
 
 </script>
