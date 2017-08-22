@@ -120,7 +120,7 @@
                 <div class="item-deposit">
                     <h4>지역</h4>
                     <select id="city" name="city" th:onChange="'javascript:selectCity(this)'">
-                        <option value="" selected="selected">전국</option>
+                        <option value="0" selected="selected">전국</option>
                         <option value="1">서울</option>
                         <option value="2">인천</option>
                         <option value="3">대전</option>
@@ -153,7 +153,7 @@
     var item = [[${item}]];
     var USD;
     var UED;
-    var city;
+    var city = 0;
     makeClusterMap(ingFestival(item));
 
 </script>

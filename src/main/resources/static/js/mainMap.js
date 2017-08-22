@@ -94,9 +94,52 @@ function reinventionDate() {
 function setMap() {
     var map = new naver.maps.Map('map', {
         center: new naver.maps.LatLng(36, 127),
-        zoom: 2,
-        mapTypeId: naver.maps.MapTypeId.NORMAL,
-        mapTypeControl: true
+        zoom : 2,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+            style: naver.maps.MapTypeControlStyle.DROPDOWN
+        }
+    });
+
+    var trafficLayer = new naver.maps.TrafficLayer({
+        interval: 2000 // 2초마다 새로고침
+    });
+
+    var btn = $('#traffic');
+
+    naver.maps.Event.addListener(map, 'trafficLayer_changed', function(trafficLayer) {
+        if (trafficLayer) {
+            btn.addClass('control-on');
+            $("#autorefresh").parent().show();
+            $("#autorefresh")[0].checked = true;
+        } else {
+            btn.removeClass('control-on');
+            $("#autorefresh").parent().hide();
+        }
+    });
+
+    trafficLayer.setMap(map);
+
+
+    btn.on("click", function(e) {
+        e.preventDefault();
+
+        if (trafficLayer.getMap()) {
+            trafficLayer.setMap(null);
+        } else {
+            trafficLayer.setMap(map);
+        }
+    });
+
+    $("#autorefresh").on("click", function(e) {
+        var btn = $(this),
+            checked = btn.is(":checked");
+
+        if (checked) {
+            trafficLayer.startAutoRefresh();
+        } else {
+            trafficLayer.endAutoRefresh();
+        }
     });
     //옵션 없이 지도 객체를 생성하면 서울시청을 중심으로 하는 11레벨의 지도가 생성됩니다.
     return map;
@@ -105,21 +148,23 @@ function setMap() {
 
 //cluster를 찍을 LatLng를 파싱합니다.
 function getMarkLatLng(item) {
+
+
     var markers = [];
-    var latlng;
     for (var i = 0; i < item.length; i++) {
-        latlng = new naver.maps.LatLng(item[i].mapY, item[i].mapX),
-            marker = new naver.maps.Marker({
-                position: latlng,
-                draggable: true
-            });
-        markers.push(marker);
-        naver.maps.Event.addListener(marker, "click", function (e) {
-            console.log(marker.getPosition())
+        var marker = new naver.maps.Marker({
+            position: new naver.maps.LatLng(item[i].mapY, item[i].mapX),
+            draggable: true,
+            icon: {
+                url: '/image/cluster/ico_pin.jpg', //50, 68 크기의 원본 이미지
+                size: new naver.maps.Size(25, 34),
+                scaledSize: new naver.maps.Size(25, 34),
+                origin: new naver.maps.Point(0, 0),
+                anchor: new naver.maps.Point(12, 34)
+            }
         });
-
+        markers.push(marker);
     }
-
     return markers;
 }
 
@@ -177,7 +222,6 @@ function getFestivalKeyword() {
 
     $(function () {
 
-
         $("#slider-range").slider({
             range: true,
             min: new Date('2015.01.01').getTime() / 1000,
@@ -189,14 +233,19 @@ function getFestivalKeyword() {
                     " - " + addMonth((new Date(ui.values[1] * 1000))));
                 USD = new Date(ui.values[0] * 1000);
                 UED = new Date(ui.values[1] * 1000);
-                getUserDate()
+
+                getUserDate();
+
             }
         });
+
+
         $("#amount").val(addMonth((new Date($("#slider-range").slider("values", 0) * 1000))) +
             " - " + addMonth((new Date($("#slider-range").slider("values", 1) * 1000))));
     });
 
     $('select').find('option:first').attr('selected', 'selected');
+    city = '';
     return makeClusterMap(workedList)
 }
 
@@ -217,7 +266,7 @@ $(function () {
         range: true,
         min: new Date('2015.01.01').getTime() / 1000,
         max: new Date('2018.12.31').getTime() / 1000,
-        step: 86400,
+        step: 1,
         values: [new Date().getTime() / 1000, new Date().getTime() / 1000],
         slide: function (event, ui) {
             $("#amount").val(addMonth((new Date(ui.values[0] * 1000))) +
@@ -229,6 +278,7 @@ $(function () {
     });
     $("#amount").val(addMonth((new Date($("#slider-range").slider("values", 0) * 1000))) +
         " - " + addMonth((new Date($("#slider-range").slider("values", 1) * 1000))));
+
 
 });
 
@@ -249,10 +299,10 @@ function getUserDate() {
     //컨텐츠 내용이 있는지 확인 2.if
     //있다면 for문을 돌면서 검색어를 가지고 있는 list 들만 추출 3,4 for,if
 
-    if (content != '' && city != null) {
+    if (content != '' && city != 0) {
         for (var i = 0; i < item.length; i++) {
             if (item[i].areaCode == city && item[i].title.match(content)) {
-                workedList.push(item[i])
+                workedList.push(item[i]);
             }
         }
         return userCheckDate(workedList)
@@ -260,21 +310,22 @@ function getUserDate() {
     else if (content != '') {
         for (var i = 0; i < item.length; i++) {
             if (item[i].title.match(content)) {
-                workedList.push(item[i])
+                workedList.push(item[i]);
             }
         }
         return userCheckDate(workedList)
     }
-    else if (city != null) {
+    else if (city != 0) {
         for (var i = 0; i < item.length; i++) {
             if (item[i].areaCode == city) {
                 workedList.push(item[i])
+
             }
         }
         return userCheckDate(workedList)
     }
 
-    else return userCheckDate(item)
+    else return userCheckDate(item);
 }
 
 //검색어가 있다면 리스트를 수정 후
