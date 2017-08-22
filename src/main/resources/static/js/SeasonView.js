@@ -79,17 +79,16 @@ function FestivalView(item) {
 
 
     for (var i = 0; i < item.length; i++) {
-
         var li = document.createElement('li');
         li.className += "tg-template";
-
 
         var a = document.createElement('a');
         a.className += "a-detail";
         a.href += '/daview/detail/' + item[i].contentId;
-        var a2 = document.createElement('a');
-        a2.className += "a2-detail";
-        a2.href += '/daview/detail/' + item[i].contentId;
+
+        var a3 = document.createElement('a');
+        a3.className += "a3-detail";
+        a3.href += '/daview/detail/' + item[i].contentId;
 
         var img = document.createElement('img');
         img.src += item[i].firstImage;
@@ -98,19 +97,20 @@ function FestivalView(item) {
         var recomImg = document.createElement('img');
         recomImg.src += "/image/season/custom_233.gif";
 
-        // var likeCount = document.
-
         var fallGalLiA1 = fallGalUl.appendChild(li);
-        var fallGalLiA2 = fallGalLiA1.appendChild(a);
-        var fallGalLiA3 = fallGalLiA1.appendChild(a2);
 
+        var fallGalLiA2 = fallGalLiA1.appendChild(a);
         fallGalLiA2.append(img);
+        fallGalLiA2.append("좋아요 " + parseInt(item[i].readCount / 1000) + "개");
+
+        var fallGalLiA3 = fallGalLiA1.appendChild(a3);
+
 
         if((item[i].readCount / 1000) < 1) {
             item[i].readCount = 1000;
         }
 
-        fallGalLiA3.append(parseInt(item[i].readCount / 1000));
+
 
         //best태그
         if (item[i].readCount > 100000) {
