@@ -38,6 +38,8 @@ public class MainDao {
                 item.setReadCount(rs.getInt(9));
                 item.setTel(rs.getString(10));
                 item.setTitle(rs.getString( 11));
+                item.setOverView(rs.getString( 12));
+                item.setHomepage(rs.getString( 13));
                 itemArrayList.add(item);
 
             }

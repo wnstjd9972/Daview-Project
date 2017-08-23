@@ -1,7 +1,3 @@
-/**
- * elementId를 받아서 Map을 형성합니다.
- * @param elementId
- */
 //첫 화면에 보여줄 현재 진행중인 축제를 걸러내는 JS입니다.
 function ingFestival(item) {
     //진행중인 축제를 담을 배열 입니다.
@@ -21,80 +17,11 @@ function ingFestival(item) {
     return ingFestival;
 }
 
-
-function makeClusterMap(item) {
-    //기존 데이터 삭제
-    reinventionDate(item);
-    //클러스터 이미지 파일입니다.
-    var htmlMarker1 = {
-            // language=HTML
-            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster/cluster-marker-1.png);background-size:contain;"></div>',
-            size: N.Size(40, 40),
-            anchor: N.Point(20, 20)
-        },
-        htmlMarker2 = {
-            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster/cluster-marker-2.png);background-size:contain;"></div>',
-            size: N.Size(40, 40),
-            anchor: N.Point(20, 20)
-        },
-        htmlMarker3 = {
-            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster/cluster-marker-3.png);background-size:contain;"></div>',
-            size: N.Size(40, 40),
-            anchor: N.Point(20, 20)
-        },
-        htmlMarker4 = {
-            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster/cluster-marker-4.png);background-size:contain;"></div>',
-            size: N.Size(40, 40),
-            anchor: N.Point(20, 20)
-        },
-        htmlMarker5 = {
-            content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster/cluster-marker-5.png);background-size:contain;"></div>',
-            size: N.Size(40, 40),
-            anchor: N.Point(20, 20)
-        };
-    //마커클러스터화 시킵니다.
-    var markerClustering = new MarkerClustering({
-        minClusterSize: 2,
-        maxZoom: 8,
-        map: setMap(),
-        markers: getMarkLatLng(item),
-        disableClickZoom: false,
-        gridSize: 120,
-        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
-        indexGenerator: [1, 10, 30, 40, 100],
-        stylingFunction: function (clusterMarker, count) {
-            $(clusterMarker.getElement()).find('div:first-child').text(count);
-        }
-    });
-
-    return showFestListInHtml(item);
-}
-
-
-//기존 데이터 삭제
-function reinventionDate() {
-    //함수가 실행되면 기존의 클러스터는 삭제되고 가공된 item을 clusterMap에 넣음으로써 item기반의 새로운 클러스터 지도 형성
-    var pastMap = document.getElementById("map");
-
-    //새로운 검색시 기존 데이터를 삭제
-    while (pastMap.hasChildNodes()) {
-        pastMap.removeChild(pastMap.lastChild)
-    }
-
-    var pastList = document.getElementById("itemList");
-
-    //새로운 검색시 기존 데이터를 삭제
-    while (pastList.hasChildNodes()) {
-        pastList.removeChild(pastList.lastChild)
-    }
-}
-
-
-//기본맵 설정
-function setMap() {
+function getMainMap(item) {
+    reinventionData();
     var map = new naver.maps.Map('map', {
         center: new naver.maps.LatLng(36, 127),
-        zoom : 2,
+        zoom: 2,
         mapTypeControl: true,
         mapTypeControlOptions: {
             style: naver.maps.MapTypeControlStyle.DROPDOWN
@@ -107,7 +34,7 @@ function setMap() {
 
     var btn = $('#traffic');
 
-    naver.maps.Event.addListener(map, 'trafficLayer_changed', function(trafficLayer) {
+    naver.maps.Event.addListener(map, 'trafficLayer_changed', function (trafficLayer) {
         if (trafficLayer) {
             btn.addClass('control-on');
             $("#autorefresh").parent().show();
@@ -121,7 +48,7 @@ function setMap() {
     trafficLayer.setMap(map);
 
 
-    btn.on("click", function(e) {
+    btn.on("click", function (e) {
         e.preventDefault();
 
         if (trafficLayer.getMap()) {
@@ -131,7 +58,7 @@ function setMap() {
         }
     });
 
-    $("#autorefresh").on("click", function(e) {
+    $("#autorefresh").on("click", function (e) {
         var btn = $(this),
             checked = btn.is(":checked");
 
@@ -141,16 +68,10 @@ function setMap() {
             trafficLayer.endAutoRefresh();
         }
     });
-    //옵션 없이 지도 객체를 생성하면 서울시청을 중심으로 하는 11레벨의 지도가 생성됩니다.
-    return map;
-}
 
 
-//cluster를 찍을 LatLng를 파싱합니다.
-function getMarkLatLng(item) {
-
-
-    var markers = [];
+    var markers = [],
+        infoWindows = [];
     for (var i = 0; i < item.length; i++) {
         var marker = new naver.maps.Marker({
             position: new naver.maps.LatLng(item[i].mapY, item[i].mapX),
@@ -163,12 +84,152 @@ function getMarkLatLng(item) {
                 anchor: new naver.maps.Point(12, 34)
             }
         });
+
+        var contentString = [
+            '<div class="iw_inner">',
+            '   <h3>' + item[i].title + '</h3>',
+            '   <p>' + item[i].addr1 + '<br />',
+            item[i].homepage +'<br/>',
+            '<a class="rightText" href=/daview/detail/'+ item[i].contentId+' >\t+ 자세히보기</a>',
+            '   </p>',
+            '</div>'
+        ].join('');
+
+        var infoWindow = new naver.maps.InfoWindow({
+            content: contentString,
+            maxWidth: 140,
+            backgroundColor: "#eee",
+            borderColor: "#2db400",
+            borderWidth: 5,
+            anchorSize: new naver.maps.Size(30, 30),
+            anchorSkew: true,
+            anchorColor: "#eee",
+            pixelOffset: new naver.maps.Point(20, -20)
+        });
+
         markers.push(marker);
+        infoWindows.push(infoWindow);
+
     }
-    return markers;
+    naver.maps.Event.addListener(map, 'idle', function () {
+        updateMarkers(map, markers);
+    });
+
+    function updateMarkers(map, markers) {
+
+        var mapBounds = map.getBounds();
+        var marker, position;
+
+        for (var i = 0; i < markers.length; i++) {
+
+            marker = markers[i];
+            position = marker.getPosition();
+
+            if (mapBounds.hasLatLng(position)) {
+                showMarker(map, marker);
+            } else {
+                hideMarker(map, marker);
+            }
+        }
+    }
+
+    function showMarker(map, marker) {
+
+        if (marker.setMap()) return;
+        marker.setMap(map);
+    }
+
+    function hideMarker(map, marker) {
+
+        if (!marker.setMap()) return;
+        marker.setMap(null);
+    }
+
+// 해당 마커의 인덱스를 seq라는 클로저 변수로 저장하는 이벤트 핸들러를 반환합니다.
+    function getClickHandler(seq) {
+        return function (e) {
+            var marker = markers[seq],
+                infoWindow = infoWindows[seq];
+
+            if (infoWindow.getMap()) {
+                infoWindow.close();
+            } else {
+                infoWindow.open(map, marker);
+            }
+        }
+    }
+
+    for (var i = 0, ii = markers.length; i < ii; i++) {
+        naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
+    }
+    makeClusterMap();
+
+    function makeClusterMap() {
+        //클러스터 이미지 파일입니다.
+        var htmlMarker1 = {
+                // language=HTML
+                content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster/cluster-marker-1.png);background-size:contain;"></div>',
+                size: N.Size(40, 40),
+                anchor: N.Point(20, 20)
+            },
+            htmlMarker2 = {
+                content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster/cluster-marker-2.png);background-size:contain;"></div>',
+                size: N.Size(40, 40),
+                anchor: N.Point(20, 20)
+            },
+            htmlMarker3 = {
+                content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster/cluster-marker-3.png);background-size:contain;"></div>',
+                size: N.Size(40, 40),
+                anchor: N.Point(20, 20)
+            },
+            htmlMarker4 = {
+                content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster/cluster-marker-4.png);background-size:contain;"></div>',
+                size: N.Size(40, 40),
+                anchor: N.Point(20, 20)
+            },
+            htmlMarker5 = {
+                content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/image/cluster/cluster-marker-5.png);background-size:contain;"></div>',
+                size: N.Size(40, 40),
+                anchor: N.Point(20, 20)
+            };
+        //마커클러스터화 시킵니다.
+        var markerClustering = new MarkerClustering({
+            minClusterSize: 2,
+            maxZoom: 8,
+            map: map,
+            markers: markers,
+            disableClickZoom: false,
+            gridSize: 120,
+            icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
+            indexGenerator: [1, 10, 30, 40, 100],
+            stylingFunction: function (clusterMarker, count) {
+                $(clusterMarker.getElement()).find('div:first-child').text(count);
+            }
+        });
+
+        return showFestListInHtml(item);
+    }
+
+
+    function reinventionData() {
+        //함수가 실행되면 기존의 클러스터는 삭제되고 가공된 item을 clusterMap에 넣음으로써 item기반의 새로운 클러스터 지도 형성
+        var pastMap = document.getElementById("map");
+
+        //새로운 검색시 기존 데이터를 삭제
+        while (pastMap.hasChildNodes()) {
+            pastMap.removeChild(pastMap.lastChild)
+        }
+
+        var pastList = document.getElementById("itemList");
+
+        //새로운 검색시 기존 데이터를 삭제
+        while (pastList.hasChildNodes()) {
+            pastList.removeChild(pastList.lastChild)
+        }
+    }
 }
 
-//Html에 추출한 item을 보여줍니다.
+
 function showFestListInHtml(item) {
     for (var i = 0; i < item.length; i++) {
         //클릭시 detail로 이동
@@ -206,14 +267,17 @@ function showFestListInHtml(item) {
         tagDiv.appendChild(TextDiv).appendChild(iTitle);
         tagDiv.appendChild(TextDiv).appendChild(iStD);
     }
-}
+
 
 //검색버튼을 누르거나 엔터키를 입력하면 실행합니다.
 //축제리스트를 걸러내는 JS
+}
+
 function getFestivalKeyword() {
     //검색창에서 검색어를 받아옵니다.
     var content = document.getElementsByName("search_fest").item("0").value;
     var workedList = [];
+    console.log(content);
 
     for (var i = 0; i < item.length; i++) {
         if (item[i].addr1.match(content) || item[i].title.match(content)) workedList.push(item[i])
@@ -246,7 +310,7 @@ function getFestivalKeyword() {
 
     $('select').find('option:first').attr('selected', 'selected');
     city = '';
-    return makeClusterMap(workedList)
+    return getMainMap(workedList)
 }
 
 //검색창에 엔터가 눌러지면 getFestivalKeyword 함수가 실행됩니다.
@@ -343,7 +407,7 @@ function userCheckDate(item) {
             userCheckList.push(item[i])
         }
     }
-    return makeClusterMap(userCheckList);
+    return getMainMap(userCheckList);
 }
 
 //select box 지역 선택
