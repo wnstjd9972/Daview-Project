@@ -42,18 +42,25 @@ function detailInformation(item) {
     var li5 = document.createElement('li');
     li5.className += "detail-informLioverView";
 
+    var linebreak = document.createElement("br");
+
 
     var detailInformLi= detailInformUl.appendChild(li);
-    detailInformLi.append("축제 시작  " + item[0].eventStartDate +"\n");
-    var detailInformLi2= detailInformUl.appendChild(li2);
-    detailInformLi2.append("축제 종료  " + item[0].eventEndDate +"\n");
-    var detailInformLi3= detailInformUl.appendChild(li3);
-    detailInformLi3.append("축제 장소  " + item[0].addr1 +"\n");
-    var detailInformLi4= detailInformUl.appendChild(li4);
-    detailInformLi4.append("전화번호 " + item[0].tel +"\n");
-    var detailInformLi5= detailInformUl.appendChild(li5);
-    detailInformLi5.append("상세설명 " + item[0].overView +"\n");
+    detailInformLi.append("축제 시작  " + item[0].eventStartDate);
 
+    var detailInformLi2= detailInformUl.appendChild(li2);
+    detailInformLi2.append("축제 종료  " + item[0].eventEndDate);
+
+    var detailInformLi3= detailInformUl.appendChild(li3);
+    detailInformLi3.append("축제 장소");
+    detailInformLi3.append(linebreak);
+    detailInformLi3.append(item[0].addr1);
+
+    var detailInformLi4= detailInformUl.appendChild(li4);
+    detailInformLi4.innerHTML = "홈페이지</br></br>" + item[0].homepage;
+
+    var detailInformLi5= detailInformUl.appendChild(li5);
+    detailInformLi5.innerHTML = "상세설명</br></br>" + item[0].overView;
 
     var div2 = document.createElement('div');
     div2.className += "detail-map";
