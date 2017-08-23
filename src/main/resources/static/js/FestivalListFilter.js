@@ -8,6 +8,7 @@ function getFestivalKeyword2() {
         return;
     }
     //match = 포함되어있는 / 포함되어 있다면 workedList배열에 담습니다.
+    console.log(item)
     for (var i = 0; i < item.length; i++) {
         if (item[i].addr1.match(content) || item[i].title.match(content)) {
             workedList.push(item[i])
@@ -19,13 +20,12 @@ function getFestivalKeyword2() {
         pastList.removeChild(pastList.lastChild)
     }
 
-    return FestivalView(workedList)
+    return FestivalView(workedList);
 }
 
 $(document).ready(function () {
     $("input[name=search_fest]").keydown(function (key) {
         if (key.keyCode == 13) {//키가 13이면 실행 (엔터는 13)
-
             getFestivalKeyword2();
         }
     });

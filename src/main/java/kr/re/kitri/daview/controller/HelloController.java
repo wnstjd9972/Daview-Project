@@ -93,15 +93,16 @@ public class HelloController {
     @RequestMapping("/daview/area1")
     public  ModelAndView area1() throws Exception {
         List<Item> itemList = area1Service.getBoardArea1();
-        ModelAndView mav = new ModelAndView("/area/area");
+        ModelAndView mav = new ModelAndView("/area/area1");
         mav.addObject("item",itemList);
         return mav;
+
     }
 
     @RequestMapping("/daview/area2")
     public  ModelAndView area2() throws Exception {
         List<Item> itemList = area2Service.getBoardArea2();
-        ModelAndView mav = new ModelAndView("/area/area");
+        ModelAndView mav = new ModelAndView("/area/area2");
         mav.addObject("item",itemList);
         return mav;
     }
@@ -109,7 +110,7 @@ public class HelloController {
     @RequestMapping("/daview/area3")
     public  ModelAndView area3() throws Exception {
         List<Item> itemList = area3Service.getBoardArea3();
-        ModelAndView mav = new ModelAndView("/area/area");
+        ModelAndView mav = new ModelAndView("/area/area3");
         mav.addObject("item",itemList);
         return mav;
     }
@@ -117,7 +118,7 @@ public class HelloController {
     @RequestMapping("/daview/area4")
     public  ModelAndView area4() throws Exception {
         List<Item> itemList = area4Service.getBoardArea4();
-        ModelAndView mav = new ModelAndView("/area/area");
+        ModelAndView mav = new ModelAndView("/area/area4");
         mav.addObject("item",itemList);
         return mav;
     }
@@ -125,7 +126,7 @@ public class HelloController {
     @RequestMapping("/daview/area5")
     public  ModelAndView area5() throws Exception {
         List<Item> itemList = area5Service.getBoardArea5();
-        ModelAndView mav = new ModelAndView("/area/area");
+        ModelAndView mav = new ModelAndView("/area/area5");
         mav.addObject("item",itemList);
         return mav;
     }
@@ -133,7 +134,7 @@ public class HelloController {
     @RequestMapping("/daview/area6")
     public  ModelAndView area6() throws Exception {
         List<Item> itemList = area6Service.getBoardArea6();
-        ModelAndView mav = new ModelAndView("/area/area");
+        ModelAndView mav = new ModelAndView("/area/area6");
         mav.addObject("item",itemList);
         return mav;
     }
@@ -145,7 +146,6 @@ public class HelloController {
         mav.addObject("item",itemList);
         return mav;
     }
-
 
 
 

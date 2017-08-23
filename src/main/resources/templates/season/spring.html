@@ -63,9 +63,7 @@
         </a>
       </li>
 
-      <li class="has_d2">
-        <a href="/">고객센터</a>
-      </li>
+
 
     </ul>
   </div>
@@ -88,14 +86,33 @@
     <input id="btn-room-search" name="btn-room-search" value="Rechercher" type="submit">
   </div>
   <div class="gallery" id="gallery">
-
+    <a id="MOVE_TOP_BTN" href="#">
+      <img src="/image/search/img_top.png" style="width: 80px; height: 110px;">
+    </a>
   </div>
 </div>
 
 <script th:inline="javascript">
 
-    var item = [[${item}]];
-    springFestival(item);
+    var item2 = [[${item}]];
+    //봄 3~5월
+    function springFestival(item) {
+        var springFest = [];
+        for (var i = 0; i < item.length; i++) {
+            var sday = new Date(item[i].eventStartDate);
+            var eday = new Date(item[i].eventEndDate);
+
+            if ((sday.getMonth() >= 2 && sday.getMonth() <= 4 ) || ( eday.getMonth() >= 2 && eday.getMonth() <= 4)) {
+                // console.log(sday.getMonth());
+                // console.log(eday.getMonth());
+                springFest.push(item[i]);
+            }
+        }
+        return springFest;
+    }
+    var item =  springFestival(item2);
+    FestivalView(item);
+
 
 
 </script>

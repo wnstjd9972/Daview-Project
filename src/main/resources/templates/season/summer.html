@@ -63,9 +63,6 @@
         </a>
       </li>
 
-      <li class="has_d2">
-        <a href="/">고객센터</a>
-      </li>
 
     </ul>
   </div>
@@ -88,14 +85,34 @@
     <input id="btn-room-search" name="btn-room-search" value="Rechercher" type="submit">
   </div>
   <div class="gallery" id="gallery">
-
+    <a id="MOVE_TOP_BTN" href="#">
+      <img src="/image/search/img_top.png" style="width: 80px; height: 110px;">
+    </a>
   </div>
 </div>
 
 <script th:inline="javascript">
 
-    var item = [[${item}]];
-    summerFestival(item);
+    var item2 = [[${item}]];
+    //여름은 6~8월
+    function summerFestival(item) {
+        var summerFest = [];
+        for (var i = 0; i < item.length; i++) {
+            var sday = new Date(item[i].eventStartDate);
+            var eday = new Date(item[i].eventEndDate);
+
+            if ((sday.getMonth() >= 5 && sday.getMonth() <= 7 ) || ( eday.getMonth() >= 5 && eday.getMonth() <= 7)) {
+                // console.log(sday.getMonth());
+                // console.log(eday.getMonth());
+                summerFest.push(item[i]);
+            }
+        }
+        return summerFest;
+    }
+
+
+    var item =  summerFestival(item2);
+    FestivalView(item);
 
 
 </script>
