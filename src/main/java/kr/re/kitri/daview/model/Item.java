@@ -15,6 +15,11 @@ public class Item {
     private String tel;
     private String title;
     private String OverView;
+    private String homepage;
+
+    public Item() {
+
+    }
 
     @Override
     public String toString() {
@@ -31,6 +36,7 @@ public class Item {
                 ", tel='" + tel + '\'' +
                 ", title='" + title + '\'' +
                 ", OverView='" + OverView + '\'' +
+                ", homepage='" + homepage + '\'' +
                 '}';
     }
 
@@ -130,7 +136,15 @@ public class Item {
         OverView = overView;
     }
 
-    public Item(int areaCode, String addr1, int contentId, Date eventStartDate, Date eventEndDate, Object firstImage, double mapX, double mapY, int readCount, String tel, String title, String overView) {
+    public String getHomepage() {
+        return homepage;
+    }
+
+    public void setHomepage(String homepage) {
+        this.homepage = homepage;
+    }
+
+    public Item(int areaCode, String addr1, int contentId, Date eventStartDate, Date eventEndDate, Object firstImage, double mapX, double mapY, int readCount, String tel, String title, String overView, String homepage) {
         this.areaCode = areaCode;
         this.addr1 = addr1;
         this.contentId = contentId;
@@ -143,11 +157,6 @@ public class Item {
         this.tel = tel;
         this.title = title;
         OverView = overView;
+        this.homepage = homepage;
     }
-
-    public Item() {
-
-    }
-
-
 }

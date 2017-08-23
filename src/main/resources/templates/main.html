@@ -13,7 +13,7 @@
             src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
     <script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}"></script>
     <script type="text/javascript" th:src="@{js/markerClustering.js}"></script>
-    <script type="text/javascript" th:src="@{js/mainMap.js}"></script>
+    <script type="text/javascript" th:src="@{js/main.js}"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
@@ -33,7 +33,6 @@
                 </a>
 
                 <div class="depth2_bx">
-                    <a href="/daview/all">모든 계절</a>
                     <a href="/daview/spring">봄</a>
                     <a href="/daview/summer">여름</a>
                     <a href="/daview/fall">가을</a>
@@ -118,7 +117,12 @@
                     <div id="slider-range"></div>
                 </div>
                 <div class="item-deposit">
-                    <h4>지역</h4>
+                    <div class="size50">
+                        <h4>지역</h4>
+                    </div>
+                    <div class="size50">
+                        <img class="resetButton" src="/image/search/arrow-icon.png" th:onclick="'javascript:reset()'">
+                    </div>
                     <select id="city" name="city" th:onChange="'javascript:selectCity(this)'">
                         <option value="0" selected="selected">전국</option>
                         <option value="1">서울</option>
@@ -151,10 +155,10 @@
 <script th:inline="javascript">
     //item 객체를 받아와서 thymeleaf 형태로 변환
     var item = [[${item}]];
-    var USD;
-    var UED;
+    var USD = new Date();
+    var UED = new Date();
     var city = 0;
-    makeClusterMap(ingFestival(item));
+    getMainMap(ingFestival(item));
 
 </script>
 </body>
