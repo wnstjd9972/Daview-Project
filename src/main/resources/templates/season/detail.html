@@ -8,14 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>전국 구석구석</title>
 
-    <link th:href="@{/css/fall.css}" rel="stylesheet" />
+
     <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link th:href="@{/css/detail.css}" rel="stylesheet" />
+
     <link rel="shortcut icon" th:href="@{/image/logo/favicon.ico}"/>
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
+    <script type="text/javascript" th:src="@{/js/DetailView.js}"></script>
 </head>
 <body>
-<div class="header">
+<div class="header" >
     <h1><a href="/daview">
         <img class="Logo" th:src="@{/image/logo/project_logo.png}" alt="다뷰"/>
     </a></h1>
@@ -24,12 +27,11 @@
 
         <ul id="gnb-container">
             <li class="has_d2">
-                <a href="/">계절별 축제
+                <a href="/daview/spring">계절별 축제
                     <small>봄/여름/가을/겨울</small>
                 </a>
 
                 <div class="depth2_bx">
-                    <a href="/daview/all">모든 계절</a>
                     <a href="/daview/spring">봄</a>
                     <a href="/daview/summer">여름</a>
                     <a href="/daview/fall">가을</a>
@@ -38,20 +40,22 @@
             </li>
 
             <li class="has_d2">
-                <a href="/search/map">테마별 축제
-                    <small>불꽃놀이/해변축제/꽃축제</small>
+                <a href="/daview/area1">지역별 축제
+                    <small>축제</small>
                 </a>
 
                 <div class="depth2_bx">
-                    <a href="/">모든 테마</a>
-                    <a href="/">불꽃놀이</a>
-                    <a href="/">해변축제</a>
-                    <a href="/">꽃축제</a>
+                    <a href="/daview/area1">서울/경기 지방</a>
+                    <a href="/daview/area2">관동 지방</a>
+                    <a href="/daview/area3">호서 지방</a>
+                    <a href="/daview/area4">호남 지방</a>
+                    <a href="/daview/area5">영남 지방</a>
+                    <a href="/daview/area6">제주 지방</a>
                 </div>
             </li>
 
             <li class="has_d2">
-                <a href="/">축제 순위
+                <a href="/daview/rank">축제 순위
                     <small>전국 축제 TOP 100</small>
                 </a>
             </li>
@@ -70,39 +74,37 @@
         </div>
     </div>
 </div>
-
 <div class="container">
-    <div class="map-container">
-        <table id="userDetailTable">
-            <thead>
-            <tr>
-                <th>주소</th>
-                <th>시작날짜</th>
-                <th>끝나는날짜</th>
-                <th>이미지</th>
-                <th>X</th>
-                <th>Y</th>
-                <th>조회수</th>
-                <th>전화번호</th>
-                <th>제목</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item : ${itemList}">
-              
-                <td th:text="${item.addr1}">주소</td>
-                <td th:text="${item.eventStartDate}">시작날짜</td>
-                <td th:text="${item.eventEndDate}">끝나는날짜</td>
-                <td><img th:src="${item.firstImage}" width="500px" height="300px"></td>
-                <td th:text="${item.mapX}">X</td>
-                <td th:text="${item.mapY}">Y</td>
-                <td th:text="${item.readCount}">조회수</td>
-                <td th:text="${item.tel}">전화번호</td>
-                <td th:text="${item.title}">제목</td>
-            </tr>
-            </tbody>
-        </table>
+    <!--<div id="detail-container" class="detail-container">-->
+        <!--<div id = "listTitle" class="listTitle"></div>-->
+        <!--<div id="map" class="map">-->
+
+        <!--</div>-->
+        <!--<div class="detail-inform">-->
+            <!--<dl class="detail-informList" th:each="item : ${item}">-->
+                <!--<dt>시작날짜 :</dt><dd class="detail-informLi" th:text = "${item.eventStartDate}"></dd>-->
+                <!--<dt>종료날짜 :</dt><dd class="detail-informLi" th:text = "${item.eventEndDate}"></dd>-->
+                <!--<dt>주소 :</dt><dd class="detail-informLi" th:text = "${item.addr1}"></dd>-->
+                <!--<dt>전화번호 :</dt><dd class="detail-informLi" th:text = "${item.tel}"></dd>-->
+            <!--</dl>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="detail-container">
+        <div id = "listTitle" class="listTitle">
+        </div>
     </div>
 </div>
+
+<script th:inline="javascript">
+    var item = [[${item}]];
+//    makeTitle(item);
+//    setMap2(item);
+//    detailFestival(item);
+
+    makeTitle(item);
+
+
+</script>
+
 </body>
 </html>

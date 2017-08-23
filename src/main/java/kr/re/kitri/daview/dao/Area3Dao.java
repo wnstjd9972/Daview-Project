@@ -14,14 +14,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Repository
-public class MainBoardDao {
+public class Area3Dao {
 
     @Autowired
     InsertService insertService;
-    public List<Item> getBoard() {
 
+    public List<Item> getArea3() {
         Connection con  = insertService.getConnection();
-        String query = "select firstImage, title, contentId, eventStartDate, eventEndDate, readCount, addr1 from festival order by eventStartDate DESC;";
+        String query = "select firstImage, title, contentId, eventStartDate, eventEndDate, readCount, addr1 from festival " +
+                "WHERE areaCode = 3 or areaCode = 8 or areaCode = 33 or areaCode = 34 ORDER BY eventStartDate DESC;";
         List<Item> itemArrayList = new ArrayList<>();
         Item item;
         try {

@@ -22,7 +22,7 @@ public class DetailBoardDao {
 
         Connection con  = insertService.getConnection();
         String query = "select addr1, eventStartDate, eventEndDate, firstImage," +
-                "mapX, mapY, readCount, tel, title from festival WHERE contentId = ?;";
+                "tel, title, mapX, mapY from festival WHERE contentId = ?;";
         List<Item> itemArrayList = new ArrayList<>();
         Item item;
         try {
@@ -35,11 +35,10 @@ public class DetailBoardDao {
                 item.setEventStartDate(rs.getDate(2));
                 item.setEventEndDate(rs.getDate(3));
                 item.setFirstImage(rs.getString(4));
-                item.setMapX(rs.getDouble(5));
-                item.setMapY(rs.getDouble(6));
-                item.setReadCount(rs.getInt(7));
-                item.setTel(rs.getString(8));
-                item.setTitle(rs.getString( 9));
+                item.setTel(rs.getString(5));
+                item.setTitle(rs.getString( 6));
+                item.setMapX(rs.getDouble(7));
+                item.setMapY(rs.getDouble(8));
                 itemArrayList.add(item);
             }
             con.close();

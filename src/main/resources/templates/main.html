@@ -7,16 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>전국 구석구석</title>
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/datepicker.css}" rel="stylesheet"/>
     <link rel="shortcut icon" th:href="@{/image/logo/favicon.ico}"/>
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=JHCRp_NbcX1UiowWkucf"></script>
     <script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}"></script>
-    <script type="text/javascript" th:src="@{js/MarkerClustering.js}"></script>
-
-    <script type="text/javascript"
-            src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-    <script type="text/javascript"
-            src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" th:src="@{js/markerClustering.js}"></script>
+    <script type="text/javascript" th:src="@{js/mainMap.js}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
 <body>
 
@@ -41,17 +40,18 @@
                     <a href="/daview/winter">겨울</a>
                 </div>
             </li>
-
             <li class="has_d2">
-                <a>테마별 축제
-                    <small>불꽃놀이/해변축제/꽃축제</small>
+                <a href="/daview/area1">지역별 축제
+                    <small>축제</small>
                 </a>
 
                 <div class="depth2_bx">
-                    <a href="/">모든 테마</a>
-                    <a href="/">불꽃놀이</a>
-                    <a href="/">해변축제</a>
-                    <a href="/">꽃축제</a>
+                    <a href="/daview/area1">서울/경기 지방</a>
+                    <a href="/daview/area2">관동 지방</a>
+                    <a href="/daview/area3">호서 지방</a>
+                    <a href="/daview/area4">호남 지방</a>
+                    <a href="/daview/area5">영남 지방</a>
+                    <a href="/daview/area6">제주 지방</a>
                 </div>
             </li>
 
@@ -61,101 +61,101 @@
                 </a>
             </li>
 
-            <li class="has_d2">
-                <a href="/">고객센터</a>
-            </li>
 
         </ul>
     </div>
 
     <div class="top_btn">
         <div class="bx_user">
-            <!--<button type="button" id="exBtn"  href="/daview/login">로그인</button>-->
-            <!--네이버아이디로로그인 버튼 노출 영역-->
-            <div id="naver_id_login"></div>
-            <!-- //네이버아이디로로그인 버튼 노출 영역 -->
-            <script type="text/javascript">
-                var naver_id_login = new naver_id_login("OTNX3GqXL6QApWpE792k", "http://localhost:8080/daview");
-                var state = naver_id_login.getUniqState();
-
-                naver_id_login.setButton("green_login.png", 2,30);
-                naver_id_login.setDomain("http://localhost:8080/daview");
-                naver_id_login.setState(state);
-                naver_id_login.setPopup();
-                naver_id_login.redirect("http://localhost:8080/daview");
-                naver_id_login.init_naver_id_login();
-            </script>
-
+            <button type="button" id="exBtn">로그인</button>
+            <button type="button">회원가입</button>
         </div>
     </div>
 </div>
-
 <div class="container">
 
     <!--양옆-->
 
     <div class="map-container">
         <div class="map-area">
-            <div id="map" style="width:100%;height:100%;"></div>
+            <div id="map" style="width:100%;height:100%;">
+
+            </div>
             <div class="map-tab">
                 <div class="i-field">
                     <input type="text" id="search_fest" class="text" style="display:block;" name="search_fest"
-                           placeholder="원하시는 지역명, 축제명을 입력해주세요">
+                           placeholder="원하시는 축제명을 입력해주세요.">
                     <button type="button" name="btn-room-search" id="btn-room-search" style="display:block;"
-                            th:onclick="'javascript:getFestList();'">찾아보기
+                            th:onclick="'javascript:getFestivalKeyword();'">찾아보기
                     </button>
                 </div>
             </div>
 
             <div class="searchbox-btn" id="searchbox-btn">
                 <button type="button" id="serach-open"><img th:src="@{image/search/btn_search_open.png}"/></button>
-                <button type="buton" id="serach-close"><img th:src="@{image/search/btn_search_close.png}"/>
-                </button>
+                <button type="buton" id="serach-close"><img th:src="@{image/search/btn_search_close.png}"/></button>
             </div>
 
 
         </div>
         <div class="map-content" id="map-content">
             <!-- search -->
-            <div class="map-search">
+            <div class="map-search" id="map-search">
+                <!--<p>조회기간:-->
+                <!--</p>-->
+                <!--<div class="selectDateIm">-->
+                <!--<input id="datepicker1"> ~-->
+                <!--<input id="datepicker2">-->
+                <!--</div>-->
+                <div class="dateSearchRange">
+                    <p>
+                        <label for="amount">조회기간</label>
 
-                <div class="item-deposit">
-                    <h4>계절</h4>
-                    <select id="season" name="seaon">
-                        <option value="전체">전체</option>
-                        <option value="봄">봄</option>
-                        <option value="여름">여름</option>
-                        <option value="가을">가을</option>
-                        <option value="겨울">겨울</option>
-                    </select>
+                    </p>
+                    <input type="text" id="amount" style="border: 0; color: #ff7800; font-weight: lighter; font-size: 20px;
+                            margin-top: 2%; margin-bottom: 3%"
+                           class="amount"/>
+                    <div id="slider-range"></div>
                 </div>
-
-                <div class="item-deposit">
-                    <h4>테마</h4>
-                    <select id="thema" name="thema">
-                        <option value="전체">전체</option>
-                        <option value="불꽃놀이">불꽃놀이</option>
-                        <option value="해변축제">해변축제</option>
-                        <option value="꽃축제">꽃축제</option>
-                    </select>
-                </div>
-
                 <div class="item-deposit">
                     <h4>지역</h4>
-                    <select id="city" name="city">
-                        <option value="전체">전체</option>
-                        <option value="서울">서울</option>
-                        <option value="부산">부산</option>
+                    <select id="city" name="city" th:onChange="'javascript:selectCity(this)'">
+                        <option value="0" selected="selected">전국</option>
+                        <option value="1">서울</option>
+                        <option value="2">인천</option>
+                        <option value="3">대전</option>
+                        <option value="4">대구</option>
+                        <option value="5">광주</option>
+                        <option value="6">부산</option>
+                        <option value="7">울산</option>
+                        <option value="8">세종특별자치시</option>
+                        <option value="31">경기도</option>
+                        <option value="32">강원도</option>
+                        <option value="33">충청북도</option>
+                        <option value="34">충청남도</option>
+                        <option value="37">전라북도</option>
+                        <option value="38">전라남도</option>
+                        <option value="35">경상북도</option>
+                        <option value="36">경상남도</option>
+                        <option value="39">제주도</option>
+
                     </select>
                 </div>
-            </div>
-            <div class="container" style="overflow:auto;" id="itemList">
-                <div class="list-item">
-                </div>
 
+            </div>
+            <div class="container2" id="itemList">
             </div>
         </div>
     </div>
 </div>
+<script th:inline="javascript">
+    //item 객체를 받아와서 thymeleaf 형태로 변환
+    var item = [[${item}]];
+    var USD;
+    var UED;
+    var city = 0;
+    makeClusterMap(ingFestival(item));
+
+</script>
 </body>
 </html>
