@@ -14,23 +14,24 @@ public class Item {
     private int readCount;
     private String tel;
     private String title;
+    private String OverView;
 
-    public Item() {
-
-    }
-
-    public Item(int areaCode, String addr1, int contentId, Date eventStartDate, Date eventEndDate, Object firstImage, int mapX, int mapY, int readCount, String tel, String title) {
-        this.areaCode = areaCode;
-        this.addr1 = addr1;
-        this.contentId = contentId;
-        this.eventStartDate = eventStartDate;
-        this.eventEndDate = eventEndDate;
-        this.firstImage = firstImage;
-        this.mapX = mapX;
-        this.mapY = mapY;
-        this.readCount = readCount;
-        this.tel = tel;
-        this.title = title;
+    @Override
+    public String toString() {
+        return "Item{" +
+                "areaCode=" + areaCode +
+                ", addr1='" + addr1 + '\'' +
+                ", contentId=" + contentId +
+                ", eventStartDate=" + eventStartDate +
+                ", eventEndDate=" + eventEndDate +
+                ", firstImage=" + firstImage +
+                ", mapX=" + mapX +
+                ", mapY=" + mapY +
+                ", readCount=" + readCount +
+                ", tel='" + tel + '\'' +
+                ", title='" + title + '\'' +
+                ", OverView='" + OverView + '\'' +
+                '}';
     }
 
     public int getAreaCode() {
@@ -113,7 +114,7 @@ public class Item {
         this.tel = tel;
     }
 
-    public Object getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -121,21 +122,32 @@ public class Item {
         this.title = title;
     }
 
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "areaCode=" + areaCode +
-                ", addr1='" + addr1 + '\'' +
-                ", contentId=" + contentId +
-                ", eventStartDate=" + eventStartDate +
-                ", eventEndDate=" + eventEndDate +
-                ", firstImage=" + firstImage +
-                ", mapX='" + mapX + '\'' +
-                ", mapY='" + mapY + '\'' +
-                ", readCount=" + readCount +
-                ", tel='" + tel + '\'' +
-                ", title=" + title +
-                '}';
+    public String getOverView() {
+        return OverView;
     }
+
+    public void setOverView(String overView) {
+        OverView = overView;
+    }
+
+    public Item(int areaCode, String addr1, int contentId, Date eventStartDate, Date eventEndDate, Object firstImage, double mapX, double mapY, int readCount, String tel, String title, String overView) {
+        this.areaCode = areaCode;
+        this.addr1 = addr1;
+        this.contentId = contentId;
+        this.eventStartDate = eventStartDate;
+        this.eventEndDate = eventEndDate;
+        this.firstImage = firstImage;
+        this.mapX = mapX;
+        this.mapY = mapY;
+        this.readCount = readCount;
+        this.tel = tel;
+        this.title = title;
+        OverView = overView;
+    }
+
+    public Item() {
+
+    }
+
+
 }
