@@ -118,6 +118,7 @@ button {
     left: 8px;
 }
 .header .gnb > ul > li .depth2_bx {
+    text-align: center;
     margin-top: 1px;
     border-top-width: 0;
     box-sizing: border-box;
@@ -578,6 +579,18 @@ code {
 
 .rightText{
     float: right;
+}
+.resetButton {
+    width: 55%;
+    height: auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.size50 {
+    width: 50%;
+    margin: 0;
+    float: left;
 }
 
 /* HTML Marker */

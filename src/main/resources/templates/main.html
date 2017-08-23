@@ -33,7 +33,6 @@
                 </a>
 
                 <div class="depth2_bx">
-                    <a href="/daview/all">모든 계절</a>
                     <a href="/daview/spring">봄</a>
                     <a href="/daview/summer">여름</a>
                     <a href="/daview/fall">가을</a>
@@ -118,7 +117,12 @@
                     <div id="slider-range"></div>
                 </div>
                 <div class="item-deposit">
-                    <h4>지역</h4>
+                    <div class="size50">
+                        <h4>지역</h4>
+                    </div>
+                    <div class="size50">
+                        <img class="resetButton" src="/image/search/arrow-icon.png" th:onclick="'javascript:reset()'">
+                    </div>
                     <select id="city" name="city" th:onChange="'javascript:selectCity(this)'">
                         <option value="0" selected="selected">전국</option>
                         <option value="1">서울</option>
@@ -151,8 +155,8 @@
 <script th:inline="javascript">
     //item 객체를 받아와서 thymeleaf 형태로 변환
     var item = [[${item}]];
-    var USD;
-    var UED;
+    var USD = new Date();
+    var UED = new Date();
     var city = 0;
     getMainMap(ingFestival(item));
 
