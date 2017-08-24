@@ -57,10 +57,10 @@ function detailInformation(item) {
     detailInformLi3.append(item[0].addr1);
 
     var detailInformLi4= detailInformUl.appendChild(li4);
-    detailInformLi4.innerHTML = "홈페이지</br></br>" + item[0].homepage;
+    detailInformLi4.innerHTML = "홈페이지</br>" + item[0].homepage;
 
     var detailInformLi5= detailInformUl.appendChild(li5);
-    detailInformLi5.innerHTML = "상세설명</br></br>" + item[0].overView;
+    detailInformLi5.innerHTML = "상세설명</br>" + item[0].overView;
 
     var div2 = document.createElement('div');
     div2.className += "detail-map";
