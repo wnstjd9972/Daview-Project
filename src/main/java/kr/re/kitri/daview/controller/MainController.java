@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Controller
-public class HelloController {
+public class MainController {
     @Autowired
     private MainService mainService;
 

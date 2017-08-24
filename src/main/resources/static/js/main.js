@@ -282,7 +282,7 @@ function getFestivalKeyword() {
     }
     if (workedList.length == 0) return alert("검색하신 축제가 존재하지 않습니다.");
 
-                getUserDate();
+    getUserDate();
 
 }
 

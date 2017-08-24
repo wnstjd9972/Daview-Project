@@ -18,7 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 @Service
-public class    InsertService {
+public class InsertService {
     private static String Address;
     private static URL url;
     private static BufferedReader br;

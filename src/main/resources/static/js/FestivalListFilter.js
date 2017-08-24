@@ -8,7 +8,7 @@ function getFestivalKeyword2() {
         return;
     }
     //match = 포함되어있는 / 포함되어 있다면 workedList배열에 담습니다.
-    console.log(item)
+    console.log(item);
     for (var i = 0; i < item.length; i++) {
         if (item[i].addr1.match(content) || item[i].title.match(content)) {
             workedList.push(item[i])

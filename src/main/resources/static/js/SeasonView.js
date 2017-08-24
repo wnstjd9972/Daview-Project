@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 function FestivalView(item) {
     //태그속성주기
     var div = document.createElement('div');
